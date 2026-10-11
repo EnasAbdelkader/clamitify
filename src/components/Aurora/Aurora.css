@@ -1,0 +1,22 @@
+.aurora-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* بديل ثابت لما WebGL2 مش متاح — نفس الإحساس البصري من غير أي GPU work */
+.aurora-fallback {
+  background:
+    radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--blue) 28%, transparent) 0%, transparent 60%),
+    radial-gradient(90% 70% at 20% 0%, color-mix(in srgb, var(--green) 22%, transparent) 0%, transparent 65%);
+  opacity: 0.9;
+}

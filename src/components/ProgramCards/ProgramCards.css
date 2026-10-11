@@ -1,0 +1,280 @@
+/* ==========================================================
+   ProgramCards — Minimal Creative Agency Design
+   ========================================================== */
+
+/* ---------- Grid ---------- */
+.pc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  width: 100%;
+}
+
+/* ---------- Card shell ---------- */
+.pc-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--radius-lg, 24px);
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+[data-theme="dark"] .pc-card {
+  background: var(--surface-2, #0f1a27);
+  border-color: var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- Glow variant (dark mode / BorderGlow) ----------
+   BorderGlow بيحط طبقة .edge-light خارج حدود الكرت بـ -35px،
+   فـ overflow:hidden هنا كان بيقص التوهج بالكامل. بنخلي القص
+   على المحتوى الداخلي بس، والكرت نفسه يفضل visible. */
+.pc-card.pc-card-glow {
+  height: 100%;
+  overflow: visible;
+}
+
+.pc-card.pc-card-glow > .border-glow-inner {
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.pc-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elegant);
+  border-color: color-mix(in srgb, var(--green) 40%, transparent);
+}
+
+[data-theme="dark"] .pc-card:hover {
+  border-color: color-mix(in srgb, var(--green) 50%, transparent);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---------- Top Accent Bar ---------- */
+.pc-top-bar {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  height: 3px;
+  background: var(--gradient-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 3;
+}
+
+.pc-card:hover .pc-top-bar {
+  transform: scaleX(1);
+}
+
+[dir="rtl"] .pc-top-bar {
+  transform-origin: right;
+}
+
+/* ---------- Body ---------- */
+.pc-body {
+  position: relative;
+  z-index: 2;
+  padding: 36px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+}
+
+/* ---------- Watermark Number ---------- */
+.pc-watermark-num {
+  position: absolute;
+  top: 10px;
+  inset-inline-end: 18px;
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--navy);
+  opacity: 0.035;
+  user-select: none;
+  pointer-events: none;
+  font-family: var(--font);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+[data-theme="dark"] .pc-watermark-num {
+  color: var(--white);
+  opacity: 0.04;
+}
+
+.pc-card:hover .pc-watermark-num {
+  opacity: 0.08;
+  transform: scale(1.06) translateY(-4px);
+}
+
+/* ---------- Head Row ---------- */
+.pc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+/* ---------- Icon Tile Avatar ---------- */
+.pc-icon-tile {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--gradient-brand);
+  color: var(--white);
+  box-shadow: 0 8px 20px -4px color-mix(in srgb, var(--green) 35%, transparent);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.pc-card:hover .pc-icon-tile {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 12px 28px -4px color-mix(in srgb, var(--green) 50%, transparent);
+}
+
+/* ---------- Number Badge ---------- */
+.pc-num-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--navy) 4%, transparent);
+  border: 1px solid var(--border);
+  transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .pc-num-badge {
+  background: color-mix(in srgb, var(--white) 5%, transparent);
+}
+
+.pc-card:hover .pc-num-badge {
+  color: var(--green-600);
+  background: var(--gradient-brand-soft);
+  border-color: color-mix(in srgb, var(--green) 20%, transparent);
+}
+
+[data-theme="dark"] .pc-card:hover .pc-num-badge {
+  color: var(--green-300);
+}
+
+/* ---------- Title & Description ---------- */
+.pc-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.35;
+  margin: 0 0 12px;
+}
+
+.pc-desc {
+  font-size: 0.95rem;
+  line-height: 1.68;
+  color: var(--text-2);
+  margin: 0 0 28px;
+}
+
+/* ---------- Learn More CTA Link ---------- */
+.pc-link {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--green-700);
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--green) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
+  transition:
+    gap 0.25s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+[data-theme="dark"] .pc-link {
+  color: var(--green-300);
+  background: color-mix(in srgb, var(--green) 12%, transparent);
+  border-color: color-mix(in srgb, var(--green) 25%, transparent);
+}
+
+.pc-link:hover {
+  gap: 12px;
+  background: var(--gradient-brand);
+  color: var(--white);
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -6px color-mix(in srgb, var(--green) 45%, transparent);
+}
+
+.pc-link:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+/* ---------- Responsive Grid ---------- */
+@media (max-width: 1100px) {
+  .pc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+@media (max-width: 680px) {
+  .pc-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .pc-body {
+    padding: 28px 24px 24px;
+  }
+  .pc-title {
+    font-size: 1.15rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .pc-card,
+  .pc-top-bar,
+  .pc-watermark-num,
+  .pc-icon-tile,
+  .pc-num-badge,
+  .pc-link {
+    transition: none;
+  }
+
+  .pc-card:hover {
+    transform: none;
+  }
+
+  .pc-card:hover .pc-watermark-num,
+  .pc-card:hover .pc-icon-tile,
+  .pc-link:hover {
+    transform: none;
+  }
+
+  .pc-card:hover .pc-top-bar {
+    transform: scaleX(1);
+  }
+}

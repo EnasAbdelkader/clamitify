@@ -1,0 +1,82 @@
+climatify/
+├── 📄 README.md                           # دليل المشروع والـ Backend Developer
+├── 📄 Sitemap.txt                         # خريطة شجرة المشروع والمسارات الحالية
+├── 📄 package.json                        # Vite + React 19 + TypeScript + Lucide Icons
+├── 📄 tsconfig.json                       # إعدادات TypeScript الرئيسية
+├── 📄 vite.config.ts                      # إعدادات Vite + Rolldown/Rollup
+├── 📄 .oxlintrc.json                      # إعدادات Linter السريع (Oxlint)
+├── 📄 .env, .env.example                  # متغيرات البيئة (VITE_API_BASE_URL, VITE_USE_MOCK_API)
+├── 📁 docs/
+│   ├── 📄 FRONTEND-BACKEND-HANDOFF-PLAN.md  # خطة وتسليم الربط بين الفرونت والباك
+│   └── 📄 API_CONTRACT.md                 # العقد الرسمي للبيانات (API Contract)
+├── 📁 public/
+│   ├── 📄 favicon.svg                     # أيقونة التبويب
+│   ├── 📄 logo-dark.png, logo-white.png   # شعار Climatify للمظهرين
+│   ├── 📄 Climatify-Campign-.mp4          # فيديو الهيرو الرئيسي
+│   ├── 📄 icons.svg
+│   ├── 📄 alfont_com_F37WicklowArabicTrial-ExtraBold.otf # الخطوط الخاصة
+│   └── 📁 founders/                       # صور مؤسسي المبادرة
+├── 📁 src/
+│   ├── 📄 main.tsx                        # نقطة الانطلاق الرئيسية (Entry point)
+│   ├── 📄 App.tsx                         # شجرة المسارات كاملة (Lazy Loaded Routes)
+│   ├── 📄 index.css                       # الاستيرادات العالمية للأنماط
+│   ├── 📁 styles/
+│   │   ├── 📄 variables.css               # متغيرات الألوان، الأبعاد، والـ Z-Index
+│   │   └── 📄 global.css                  # التنسيقات العامة والـ Base Utility Styles
+│   ├── 📁 types/
+│   │   └── 📄 index.ts                    # التعريفات النمطية الكاملة (TypeScript Interfaces)
+│   ├── 📁 context/
+│   │   ├── 📄 LanguageContext.tsx         # إدارة اللغات (عربي / إنجليزي) و RTL
+│   │   └── 📄 ThemeContext.tsx            # إدارة المظهر (فاتح / داكن)
+│   ├── 📁 store/                          # إدارة الحالة العالمية (Zustand Stores)
+│   │   ├── 📄 useAuthStore.ts             # حالة الجلسة والأعضاء والأدمن (Auth & User State)
+│   │   └── 📄 useCMSStore.ts              # حالة لوحة التحكم والـ CRUD البيانات
+│   ├── 📁 services/
+│   │   ├── 📄 api.ts                      # خدمات اتصال الشبكة + Fallback Mock API
+│   │   └── 📄 mockData.ts                 # البيانات الوهمية المتكاملة للفرونت إند
+│   ├── 📁 components/
+│   │   ├── 📁 Aurora/                     # خلفيات شفق Aurora WebGL التفاعلية
+│   │   ├── 📁 BorderGlow/                 # تأثيرات التوهج البصري للكروت
+│   │   ├── 📁 ChromaGrid/                 # شبكة عرض فريق العمل التفاعلية
+│   │   ├── 📁 ProgramCards/               # شبكة كروت البرامج والمبادرات
+│   │   ├── 📁 common/                     # المكونات المشتركة للبنية
+│   │   │   ├── 📄 ErrorBoundary.tsx       # معالج أخطاء عدم توقف التطبيق
+│   │   │   └── 📄 RouteLoader.tsx         # مؤشر تحميل التنقل بين الصفحات
+│   │   ├── 📁 ui/                         # مكونات الواجهة التفاعلية
+│   │   │   ├── 📄 AnalyticsChart.tsx      # رسوم وإحصائيات لوحة التحكم
+│   │   │   ├── 📄 EmptyState.tsx          # شاشات القوائم الفاضية
+│   │   │   ├── 📄 QuickAccessMenu.tsx     # قائمة الوصول السريع
+│   │   │   └── 📄 QuickCommandPalette.tsx # لوحة الأوامر السريعة
+│   │   └── 📁 layout/
+│   │       ├── 📄 Layout.tsx              # الهيكل العام للموقع (Header + Lenis + Footer)
+│   │       ├── 📄 Header.tsx              # شريط التنقل العلوي المتجاوب
+│   │       ├── 📄 Header.css              # تنسيقات الهيدر والشاشات الصغيرة
+│   │       ├── 📄 Footer.tsx              # التذييل والنشرة البريدية
+│   │       ├── 📄 AIChatAssistant.tsx     # مساعد الذكاء الاصطناعي التفاعلي
+│   │       ├── 📄 ScrollToTop.tsx         # العودة لأعلى عند تغيير الصفحة
+│   │       └── 📄 scrollController.ts     # التحكم بقفل تمرير الصفحة أثناء المودال
+│   └── 📁 pages/                          # صفحات التطبيق والمسارات الفعلية
+│       ├── 📁 Home/                       # الصفحة الرئيسية (Route: "/")
+│       ├── 📁 About/                      # من نحن وفريق العمل (Route: "/about")
+│       ├── 📁 Programs/                   # البرامج والمبادرات (Route: "/programs")
+│       ├── 📁 Events/                     # الفعاليات والتسجيل (Route: "/events")
+│       ├── 📁 LearningHub/                # مركز التعلم والدورات (Route: "/learning-hub")
+│       ├── 📁 Media/                      # المركز الإعلامي والمدونة (Route: "/media", "/blog/:id")
+│       │   ├── 📄 Media.tsx               # قائمة المقالات والأنشطة
+│       │   └── 📄 PostDetail.tsx          # تفاصيل وتصميم المقال الفردي
+│       ├── 📁 Contact/                    # اتصل بنا وحجز المواعيد (Route: "/contact")
+│       ├── 📁 GamesHub/                   # ألعاب وحاسبة الكربون (Route: "/games")
+│       ├── 📁 Opportunities/              # الوظائف والتطوع (Route: "/opportunities")
+│       ├── 📁 Portals/                    # البوابات والشركاء (Route: "/portals")
+│       ├── 📁 Dashboard/                  # لوحة التحكم الخاصة بالمتطوع/العضو (Route: "/dashboard")
+│       ├── 📁 Auth/                       # تسجيل ودخول الأعضاء (Routes: "/login", "/register")
+│       │   ├── 📄 MemberLogin.tsx         # صفحة دخول الأعضاء
+│       │   └── 📄 MemberRegister.tsx      # صفحة إنشاء حساب جديد
+│       ├── 📁 NotFound/                   # صفحة الخطأ 404 (Route: "*")
+│       └── 📁 Admin/                      # لوحة التحكم والإدارة (Route: "/admin/*")
+│           ├── 📄 AdminLayout.tsx         # هيكل لوحة الأدمن ومستمع الجلسات
+│           ├── 📄 AdminLogin.tsx          # نموذج دخول الأدمن
+│           ├── 📄 AdminDashboardHome.tsx  # نظرة عامة والإحصائيات الرئيسية (/admin)
+│           ├── 📄 AdminContent.tsx        # إدارة المحتوى والبرامج والأنشطة (/admin/content)
+│           ├── 📄 AdminMessages.tsx       # صندوق الرسائل والاتصالات (/admin/messages)
+│           └── 📄 AdminSettings.tsx       # إعدادات الموقع كلمة المرور (/admin/settings)

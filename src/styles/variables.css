@@ -1,0 +1,142 @@
+:root {
+  /* Colors */
+  --green: #00C091;
+  --blue: #009AF8;
+  --navy: #122133;
+  --gray: #F1F5F9;
+  --white: #FFFFFF;
+
+  --green-50: #E9FBF5;
+  --green-100: #C7F4E7;
+  --green-200: #8FE8CF;
+  --green-300: #4FD7B4;
+  --green-400: #1CC09C;
+  --green-500: #00C091;
+  --green-600: #00A27D;
+  --green-700: #028263;
+  --green-800: #04644E;
+  --green-900: #084c3d;
+
+  --blue-50: #E6F5FF;
+  --blue-100: #C3E8FF;
+  --blue-200: #8FD4FF;
+  --blue-300: #5BBCFF;
+  --blue-400: #2EA8FB;
+  --blue-500: #009AF8;
+  --blue-600: #0085D6;
+  --blue-700: #066db1;
+  --blue-800: #0b578c;
+  --blue-900: #114570;
+
+  --navy-50: #EAF0F5;
+  --navy-100: #CFDCE6;
+  --navy-200: #9DB3C6;
+  --navy-300: #6987A3;
+  --navy-400: #3F5F7D;
+  --navy-500: #122133;
+  --navy-600: #0f1b2b;
+  --navy-700: #0b1422;
+  --navy-800: #070d17;
+
+  --gradient: linear-gradient(135deg, var(--blue) 0%, var(--green) 100%);
+  --gradient-soft: linear-gradient(135deg, rgba(0, 154, 248, .12) 0%, rgba(0, 192, 145, .12) 100%);
+  --gradient-brand: linear-gradient(135deg, #00C091 0%, #009AF8 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(0, 192, 145, 0.12) 0%, rgba(0, 154, 248, 0.12) 100%);
+
+  /* Default theme values (Light Mode) */
+  --bg: #F7FAFC;
+  --surface: #FFFFFF;
+  --surface-2: #F4F8FB;
+  --border: #E2EAF1;
+  --text: #122133;
+  --text-2: #475569;
+  --text-3: #94A3B8;
+
+  /* Readable aliases for the numeric text ramp. Prefer these in new code. */
+  --text-muted: var(--text-2);
+  --text-subtle: var(--text-3);
+
+  /* --border is intentionally soft (1.22:1) for decorative dividers only.
+     Interactive boundaries (inputs, buttons) must use --border-interactive,
+     which meets the WCAG 1.4.11 3:1 non-text contrast requirement. */
+  --border-interactive: #64748B;
+
+  /* Status colors */
+  --danger: #DC2626;
+  --danger-bg: #FEF2F2;
+  --success: #00A27D;
+  --success-bg: #E9FBF5;
+  --warning: #B45309;
+  --warning-bg: #FFFBEB;
+
+  /* ── z-index scale ──────────────────────────────────────────────
+     One documented ladder. Do NOT invent new values; there used to be
+     17 ad-hoc ones (40, 49, 2000, 99990, 99996, 999999…) with two
+     outright collisions between the header, the bottom nav and dialogs. */
+  --z-below: -1;
+  --z-base: 1;
+  --z-raised: 10;
+  --z-sticky: 100;      /* in-page sticky elements */
+  --z-chrome: 1000;     /* site header, mobile bottom nav */
+  --z-float: 1100;      /* chat FAB and other floating triggers */
+  --z-dialog: 100000;   /* modals, drawers, command palette */
+  --z-toast: 100100;    /* transient notifications — always on top */
+
+  /* Shadows (Refined ambient lighting) */
+  --shadow-sm: 0 2px 8px -2px rgba(18, 33, 51, 0.04), 0 1px 3px -1px rgba(18, 33, 51, 0.02);
+  --shadow-md: 0 8px 20px -6px rgba(18, 33, 51, 0.05), 0 2px 6px -2px rgba(18, 33, 51, 0.03);
+  --shadow-lg: 0 16px 32px -10px rgba(18, 33, 51, 0.06), 0 4px 12px -4px rgba(18, 33, 51, 0.03);
+  --shadow-float: 0 14px 30px -10px rgba(0, 192, 145, 0.12), 0 4px 10px -2px rgba(18, 33, 51, 0.04);
+  --shadow-elegant: 0 12px 28px -8px rgba(0, 192, 145, 0.14), 0 4px 10px -2px rgba(18, 33, 51, 0.03);
+  --shadow-glow: 0 16px 40px -16px rgba(0, 154, 248, 0.15);
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 30px;
+
+  /* Fonts */
+  --font: "Satoshi", "IBM Plex Sans Arabic", "Tajawal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-ar: "Tajawal", "IBM Plex Sans Arabic", "Satoshi", sans-serif;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --nav-h: 68px;
+  --maxw: 1200px;
+}
+
+[data-theme="dark"] {
+  --bg: #0A1018;
+  --surface: #101A26;
+  --surface-2: #15212F;
+  --border: #1E2C3C;
+  --text: #EAF1F7;
+  --text-2: #9DB3C6;
+  --text-3: #6987A3;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, .5);
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, .6);
+  --shadow-float: 0 30px 60px -20px rgba(0, 154, 248, .45), 0 12px 28px rgba(0, 0, 0, .5);
+  --gray: #15212F;
+
+  /* Dark-mode counterparts for the tokens added above. */
+  --border-interactive: #4A5F76;
+  --danger: #F87171;
+  --danger-bg: #2A1416;
+  --success: #34D399;
+  --success-bg: #0C2A22;
+  --warning: #FBBF24;
+  --warning-bg: #2A2010;
+}

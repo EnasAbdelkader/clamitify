@@ -1,0 +1,129 @@
+.mobile-bottom-nav-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  /* سلّم z-index واحد موثّق في variables.css (كان 99990 !important) */
+  z-index: var(--z-chrome);
+  /* الارتفاع يشمل شريط الأمان في iOS، وإلا (box-sizing: border-box) قضم
+     الـ padding مساحة الأزرار وصارت أصغر من 44px. */
+  height: calc(64px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--surface, #ffffff) !important;
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 24px -6px rgba(18, 33, 51, 0.08);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+[data-theme="dark"] .mobile-bottom-nav-bar {
+  background: var(--surface-2, #15212F) !important;
+  border-top-color: var(--border);
+  box-shadow: 0 -8px 24px -6px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-bottom-nav-scroll {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  height: 64px;
+  padding-inline: 12px;
+  /* آخر تبويب لا يجب أن يختفي تحت زر الدردشة العائم عند نهاية التمرير */
+  padding-inline-end: 76px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobile-bottom-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-bottom-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  /* هدف لمس لا يقل عن 44×44 (WCAG 2.5.8) */
+  min-width: 56px;
+  min-height: 48px;
+  padding: 6px 12px;
+  margin-block: auto;
+  border-radius: 12px;
+  color: var(--text-2);
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  scroll-snap-align: start;
+}
+
+.mobile-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.mobile-tab-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.mobile-bottom-tab:hover,
+.mobile-bottom-tab:focus {
+  color: var(--text);
+}
+
+.mobile-bottom-tab:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* التبويب النشط هو الدليل الأساسي للتنقل على الموبايل.
+   كان يستخدم --green-500 (#00C091) عند 11px فوق خلفية شبه بيضاء ≈ 2.35:1
+   وهو غير مقروء. --green-700 يعطي ≈ 5.4:1 ويطابق حالة النشط في الهيدر. */
+.mobile-bottom-tab.active {
+  color: var(--green-700);
+  background: var(--gradient-brand-soft);
+}
+
+.mobile-bottom-tab.active .mobile-tab-label {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+[data-theme="dark"] .mobile-bottom-tab.active {
+  color: var(--green-300);
+}
+
+.mobile-bottom-tab.active .mobile-tab-icon {
+  transform: translateY(-1px) scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav-bar {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-bottom-nav-scroll {
+    scroll-behavior: auto;
+  }
+
+  .mobile-bottom-tab,
+  .mobile-tab-icon {
+    transition-duration: 0.01ms !important;
+  }
+
+  .mobile-bottom-tab.active .mobile-tab-icon {
+    transform: none;
+  }
+}

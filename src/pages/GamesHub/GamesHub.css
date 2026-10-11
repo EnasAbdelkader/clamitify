@@ -1,0 +1,456 @@
+.games-hub-page-container {
+  padding-bottom: var(--space-7);
+}
+
+.games-header {
+  padding-top: var(--space-6);
+}
+
+.games-selection-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.game-selector-card {
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.game-large-icon-wrapper {
+  font-size: 3.5rem;
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-2);
+}
+
+/* Per-game accent tints — these classes were referenced by the markup but never
+   defined, so both icons rendered identically. */
+.game-large-icon-wrapper.calculator-color {
+  background: color-mix(in srgb, var(--blue) 12%, var(--surface));
+  color: var(--blue-700);
+}
+
+.game-large-icon-wrapper.garden-color {
+  background: color-mix(in srgb, var(--green) 12%, var(--surface));
+  color: var(--green-700);
+}
+
+.game-large-icon-wrapper.neutral-color {
+  background: var(--surface-2);
+  color: var(--text-2);
+}
+
+[data-theme="dark"] .game-large-icon-wrapper.calculator-color {
+  color: var(--blue-300);
+}
+
+[data-theme="dark"] .game-large-icon-wrapper.garden-color {
+  color: var(--green-300);
+}
+
+.game-selector-card h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.game-selector-card p {
+  font-size: 0.98rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.game-selector-card .btn {
+  gap: var(--space-2);
+}
+
+.game-unavailable-note {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+/* Loading / error / empty blocks shared by the games list and the quiz */
+.games-state-block {
+  width: 100%;
+  padding: var(--space-5) 0;
+}
+
+/* Carbon footprint game inside wrapper */
+.carbon-game-box, .garden-game-box {
+  max-width: 680px;
+  margin-inline: auto;
+  padding: 32px;
+}
+
+.game-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.game-box-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.game-result-panel {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.trophy-icon {
+  color: var(--warning);
+}
+
+.result-number-box {
+  background: var(--gradient-brand-soft);
+  border: 1px solid var(--border);
+  padding: 24px 40px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+}
+
+.result-num {
+  font-size: clamp(2.6rem, 12vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Windows High Contrast strips the gradient; keep the number readable. */
+@media (forced-colors: active) {
+  .result-num {
+    background: none;
+    color: CanvasText;
+  }
+}
+
+.result-unit {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-2);
+  margin-top: 8px;
+  text-align: center;
+}
+
+.feedback-rich-text p {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  text-align: start;
+}
+
+.feedback-warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border: 1px solid color-mix(in srgb, var(--warning) 35%, transparent);
+}
+
+.feedback-success {
+  background: var(--success-bg);
+  color: var(--green-700);
+  border: 1px solid var(--green-100);
+}
+
+[data-theme="dark"] .feedback-warning {
+  background: color-mix(in srgb, var(--warning) 20%, var(--surface));
+  color: color-mix(in srgb, var(--warning) 45%, var(--text));
+  border-color: color-mix(in srgb, var(--warning) 45%, transparent);
+}
+
+[data-theme="dark"] .feedback-success {
+  background: color-mix(in srgb, var(--green) 16%, var(--surface));
+  color: var(--green-300);
+  border-color: color-mix(in srgb, var(--green) 40%, transparent);
+}
+
+.game-result-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Inline feedback that replaced the old alert() calls */
+.game-live-region {
+  width: 100%;
+}
+
+.game-inline-alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: var(--space-3) auto 0;
+  max-width: 46ch;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: start;
+  border: 1px solid transparent;
+}
+
+.game-inline-alert svg {
+  flex-shrink: 0;
+}
+
+.game-inline-alert.is-success {
+  background: var(--success-bg);
+  color: var(--green-700);
+  border-color: var(--green-100);
+}
+
+.game-inline-alert.is-error {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 30%, transparent);
+}
+
+.game-inline-alert.is-warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border-color: color-mix(in srgb, var(--warning) 30%, transparent);
+}
+
+[data-theme="dark"] .game-inline-alert.is-success {
+  background: color-mix(in srgb, var(--green) 16%, var(--surface));
+  color: var(--green-300);
+  border-color: color-mix(in srgb, var(--green) 40%, transparent);
+}
+
+[data-theme="dark"] .game-inline-alert.is-error {
+  background: color-mix(in srgb, var(--danger) 18%, var(--surface));
+  color: color-mix(in srgb, var(--danger) 45%, var(--text));
+  border-color: color-mix(in srgb, var(--danger) 45%, transparent);
+}
+
+[data-theme="dark"] .game-inline-alert.is-warning {
+  background: color-mix(in srgb, var(--warning) 20%, var(--surface));
+  color: color-mix(in srgb, var(--warning) 45%, var(--text));
+  border-color: color-mix(in srgb, var(--warning) 45%, transparent);
+}
+
+/* Questions Flow */
+.progress-bar-steps {
+  margin-bottom: 24px;
+}
+
+.step-dots-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.step-dots-row .dot {
+  width: 32px;
+  height: 6px;
+  max-width: 100%;
+  background: var(--border);
+  border-radius: 99px;
+}
+
+.step-dots-row .dot.active {
+  background: var(--green);
+}
+
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.question-text {
+  font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.options-selection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.option-card-btn {
+  padding: 24px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+  height: auto;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.option-card-btn:hover {
+  border-color: var(--green);
+  background: var(--green-50);
+  color: var(--green-700);
+}
+
+.option-card-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+  border-color: var(--green);
+}
+
+[data-theme="dark"] .option-card-btn:hover {
+  background: color-mix(in srgb, var(--green) 14%, var(--surface));
+  color: var(--green-300);
+}
+
+/* Garden Game */
+.garden-simulator-panel {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.animated-tree-growing {
+  color: var(--green);
+  margin: 0 auto 12px;
+  animation: pulseTree 3s infinite ease-in-out;
+}
+
+@keyframes pulseTree {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-tree-growing {
+    animation: none;
+  }
+
+  .option-card-btn {
+    transition: none;
+  }
+}
+
+.garden-tip {
+  color: var(--text-2);
+  font-size: 0.98rem;
+  max-width: 48ch;
+  line-height: 1.6;
+}
+
+.garden-actions-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* Disabled affordances — the global .btn rules do not cover [disabled]. */
+.games-hub-page-container .btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+  .games-selection-hub-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .options-selection-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .option-card-btn {
+    min-height: 72px;
+  }
+}
+
+/* Keep everything inside a 320px viewport without horizontal scroll. */
+@media (max-width: 480px) {
+  .game-selector-card {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .carbon-game-box,
+  .garden-game-box {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .game-box-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .result-number-box {
+    padding: var(--space-5) var(--space-4);
+    width: 100%;
+  }
+
+  .game-result-actions .btn,
+  .garden-actions-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .step-dots-row .dot {
+    width: 20px;
+  }
+}
+
+/* زر فيديو اللعبة (بيفتح Popup) */
+.game-video-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}

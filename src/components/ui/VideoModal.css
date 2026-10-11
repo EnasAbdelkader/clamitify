@@ -1,0 +1,106 @@
+/* ==========================================
+   Video Modal — Popup فيديو (ألعاب المناخ + تسجيلات الجلسات)
+   ========================================== */
+
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dialog);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(5, 11, 20, 0.78);
+  backdrop-filter: blur(6px);
+  animation: videoModalFade 0.2s ease;
+}
+
+.video-modal-card {
+  width: min(960px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.video-modal-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.video-modal-close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.video-modal-close:hover {
+  background: var(--border);
+}
+
+.video-modal-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.video-modal-frame iframe,
+.video-modal-frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@keyframes videoModalFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 560px) {
+  .video-modal-overlay {
+    padding: 8px;
+  }
+
+  .video-modal-header {
+    padding: 10px 12px;
+  }
+
+  .video-modal-title {
+    font-size: 0.92rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-modal-overlay {
+    animation: none;
+  }
+
+  .video-modal-close {
+    transition: none;
+  }
+}

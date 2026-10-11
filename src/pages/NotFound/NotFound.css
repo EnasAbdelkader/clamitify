@@ -1,0 +1,100 @@
+.notfound-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 65vh;
+  padding-block: clamp(48px, 10vw, 96px);
+  text-align: center;
+}
+
+.notfound-inner {
+  max-width: 620px;
+}
+
+.notfound-code {
+  display: block;
+  font-size: clamp(4.5rem, 18vw, 8rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 8px;
+}
+
+/* Gradients are dropped in High Contrast Mode, which would leave the code invisible. */
+@media (forced-colors: active) {
+  .notfound-code {
+    background: none;
+    color: CanvasText;
+  }
+}
+
+.notfound-title {
+  font-size: clamp(1.35rem, 4vw, 1.9rem);
+  margin: 0 0 12px;
+  color: var(--text);
+}
+
+.notfound-text {
+  margin: 0 auto 28px;
+  max-width: 46ch;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+
+.notfound-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.notfound-suggestions {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.notfound-suggestions-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.notfound-suggestions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.notfound-suggestions a {
+  display: inline-block;
+  padding: 8px 16px;
+  min-height: 40px;
+  line-height: 24px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.notfound-suggestions a:hover,
+.notfound-suggestions a:focus-visible {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-50);
+}

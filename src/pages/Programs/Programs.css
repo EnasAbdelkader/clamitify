@@ -1,0 +1,966 @@
+/* ============================================================
+   PROGRAMS PAGE — PREMIUM REDESIGN
+   Follows project conventions: var(--...) tokens, [data-theme="dark"]
+   overrides with #111a2e, [dir="rtl"] adjustments, same transition
+   patterns and breakpoints as Events page.
+   ============================================================ */
+
+.programs-page-container {
+  padding-bottom: var(--space-8);
+}
+
+/* ============================================================
+   1. HERO SECTION — Dark gradient with decorative image + overlay
+   ============================================================ */
+
+.programs-hero {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  padding: calc(var(--nav-h) + 48px) 0 64px;
+  background: linear-gradient(135deg, #0b1422 0%, #122133 45%, #0a1f33 100%);
+}
+
+.programs-hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Light green tinted overlay — keeps the bright nature image visible while ensuring text contrast */
+.programs-hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(8, 60, 40, 0.55) 0%, rgba(6, 75, 48, 0.45) 50%, rgba(10, 50, 35, 0.60) 100%),
+    radial-gradient(circle at 12% 18%, rgba(0, 192, 145, 0.18), transparent 45%),
+    radial-gradient(circle at 88% 82%, rgba(0, 200, 120, 0.20), transparent 45%);
+}
+
+/* Smooth fade from hero into page background */
+.programs-hero::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.programs-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.programs-hero-content {
+  max-width: 720px;
+}
+
+.programs-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.programs-hero-title {
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-top: 20px;
+  text-shadow: 0 2px 12px rgba(0, 40, 25, 0.5);
+}
+
+.programs-hero-lead {
+  margin-top: 18px;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 60ch;
+  text-shadow: 0 1px 8px rgba(0, 40, 25, 0.4);
+}
+
+/* ============================================================
+   2. MAIN CONTENT WRAPPER
+   ============================================================ */
+
+.programs-main-content {
+  position: relative;
+  z-index: 2;
+  margin-top: -24px;
+}
+
+/* ============================================================
+   3. SECTION HEADER
+   ============================================================ */
+
+.programs-section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.programs-section-header h2 {
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  margin-top: 12px;
+  color: var(--text);
+}
+
+/* ============================================================
+   4. PROGRAMS GRID
+   ============================================================ */
+
+.programs-grid-section {
+  margin-bottom: var(--space-8);
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ============================================================
+   5. PROGRAM CARD V2
+   ============================================================ */
+
+.program-card-v2 {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease, border-color 0.3s ease;
+  scroll-margin-top: calc(var(--nav-h) + 20px);
+}
+
+[data-theme="dark"] .program-card-v2 {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.program-card-v2:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elegant);
+  border-color: var(--green);
+}
+
+/* Top accent bar — gradient brand */
+.program-card-accent-bar {
+  height: 5px;
+  width: 100%;
+  background: var(--gradient-brand);
+  flex-shrink: 0;
+}
+
+.program-card-body {
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Icon box */
+.program-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+/* Title */
+.program-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+/* Description */
+.program-card-desc {
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+/* Learn More button */
+.program-card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--navy);
+  color: #ffffff;
+  border-radius: 99px;
+  width: 100%;
+  font-weight: 700;
+  padding: 11px 20px;
+  font-size: 0.88rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: auto;
+}
+
+[data-theme="dark"] .program-card-btn {
+  background: #ffffff;
+  color: #111a2e;
+}
+
+.program-card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Flip arrow in RTL */
+[dir="rtl"] .program-card-btn-arrow {
+  transform: scaleX(-1);
+}
+
+/* ============================================================
+   6. INITIATIVES SECTION
+   ============================================================ */
+
+.programs-initiatives-section {
+  border-radius: var(--radius-xl);
+  padding: clamp(32px, 5vw, 56px);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+[data-theme="dark"] .programs-initiatives-section {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   7. INITIATIVE TABS — الحملات / برامج / معسكرات / ورش عمل
+   ============================================================ */
+
+.initiative-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 100%;
+  padding: 6px;
+  margin-bottom: 28px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .initiative-tabs {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.initiative-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-2);
+  background: none;
+  cursor: pointer;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.initiative-tab:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.initiative-tab.active {
+  background: var(--gradient-brand);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+/* كارت من غير صورة: هيدر بأيقونة نوع المبادرة */
+.initiative-icon-area {
+  display: grid;
+  place-items: center;
+  height: 140px;
+  color: #fff;
+  background: var(--gradient-brand);
+}
+
+/* كارت QR (مثلاً ملف كل الورش) */
+.initiative-qr-area {
+  display: grid;
+  place-items: center;
+  background: #fff;
+}
+
+.initiative-qr-area {
+  height: auto;
+  padding: 16px;
+}
+
+.initiative-qr-img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  /* الـ QR مربعات — التكبير الحاد بيخليه يتقري أحسن من التنعيم */
+  image-rendering: pixelated;
+}
+
+.initiative-link-btn {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--navy);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+[data-theme="dark"] .initiative-link-btn {
+  background: #fff;
+  color: #111a2e;
+}
+
+.initiative-link-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   8. INITIATIVES GRID — Smaller cards
+   ============================================================ */
+
+.initiatives-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.initiative-grid-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="dark"] .initiative-grid-card {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.initiative-grid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elegant);
+  border-color: var(--green);
+}
+
+.initiative-grid-img-area {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.initiative-grid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.initiative-grid-card:hover .initiative-grid-img {
+  transform: scale(1.05);
+}
+
+.initiative-grid-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.initiative-grid-content h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.initiative-grid-content p {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   9. BADGE + PROGRESS BAR
+   ============================================================ */
+
+.badge-category {
+  align-self: flex-start;
+  background: var(--gradient-brand-soft);
+  color: var(--green-700);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+[data-theme="dark"] .badge-category {
+  background: rgba(0, 192, 145, 0.12);
+  color: var(--green-300);
+  border-color: rgba(0, 192, 145, 0.2);
+}
+
+.initiative-progress-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.progress-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.progress-label-row strong {
+  color: var(--green-700);
+  font-size: 0.95rem;
+}
+
+[data-theme="dark"] .progress-label-row strong {
+  color: var(--green-300);
+}
+
+.initiative-progress-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .initiative-progress-track {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.initiative-progress-fill {
+  height: 100%;
+  background: var(--gradient-brand);
+  border-radius: 99px;
+  transition: width 0.6s var(--ease);
+}
+
+.initiative-target-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--text-2);
+  background: var(--surface-2);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+[data-theme="dark"] .initiative-target-box {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.initiative-target-box strong {
+  color: var(--text);
+}
+
+/* ============================================================
+   10. EMPTY STATE
+   ============================================================ */
+
+.programs-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.programs-empty-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+[data-theme="dark"] .programs-empty-icon {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.programs-empty-state h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.programs-empty-state p {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  max-width: 40ch;
+}
+
+/* ============================================================
+   11. ERROR STATE
+   ============================================================ */
+
+.programs-error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 100px 24px;
+}
+
+.programs-error-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.programs-error-state h1,
+.programs-error-state h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.programs-error-state p {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  max-width: 46ch;
+}
+
+.programs-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+/* ============================================================
+   12. SKELETON LOADING
+   ============================================================ */
+
+.programs-skeleton-hero {
+  height: 360px;
+  background: linear-gradient(135deg, #0b1422 0%, #122133 100%);
+}
+
+.programs-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 40px;
+}
+
+.programs-skeleton-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.p-skeleton-bar {
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    var(--surface-2) 50%,
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  animation: programs-shimmer 1.5s ease-in-out infinite;
+}
+
+/* Bleeds to the card edges. `width: auto` + symmetric negative inline margins
+   replaces the old duplicated `width` pair, which hardcoded a 24px padding. */
+.p-skeleton-accent {
+  height: 5px;
+  width: auto;
+  border-radius: 0;
+  margin-block: -24px 12px;
+  margin-inline: -24px;
+}
+
+.p-skeleton-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+}
+
+.p-skeleton-title {
+  height: 22px;
+  width: 80%;
+}
+
+.p-skeleton-text {
+  height: 14px;
+  width: 100%;
+}
+
+.p-skeleton-text:last-of-type {
+  width: 65%;
+}
+
+.p-skeleton-btn {
+  height: 42px;
+  border-radius: 99px;
+  margin-top: 8px;
+}
+
+@keyframes programs-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================================
+   13. MODAL — Accessible program details dialog
+   ============================================================ */
+
+.programs-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 13, 23, 0.88);
+  /* The site header / mobile bottom nav sit at 99990 !important and the chat
+     bubble at 99996 — anything below 100000 renders underneath them. */
+  z-index: var(--z-dialog, 100000);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  animation: programs-fade-in 0.25s ease;
+}
+
+.programs-modal-card {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  animation: programs-scale-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] .programs-modal-card {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Modal Accent Header */
+.programs-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px;
+  background: var(--gradient-brand-soft);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-theme="dark"] .programs-modal-header {
+  background: rgba(0, 192, 145, 0.08);
+}
+
+.programs-modal-header-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.programs-modal-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.programs-modal-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-bottom: 2px;
+}
+
+.programs-modal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.programs-modal-close-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--text-3);
+  transition: background 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.programs-modal-close-btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* Modal Body */
+.programs-modal-body {
+  padding: 28px;
+}
+
+.programs-modal-summary {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-700);
+  line-height: 1.6;
+}
+
+[data-theme="dark"] .programs-modal-summary {
+  color: var(--green-300);
+}
+
+.programs-modal-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+.programs-modal-full-desc {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+/* Shown when the CMS has no longDescription — deliberately neutral, so the page
+   never invents marketing copy about a program nobody described. */
+.programs-modal-no-desc {
+  color: var(--text-3);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 24px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+}
+
+[data-theme="dark"] .programs-modal-no-desc {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.programs-modal-cta {
+  width: 100%;
+  height: 48px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+
+/* ============================================================
+   14. KEYFRAMES
+   ============================================================ */
+
+/* `programs-shimmer` is declared once, in section 12 above. */
+
+@keyframes programs-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes programs-scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   15. RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 980px) {
+  .programs-grid,
+  .programs-skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .initiatives-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .programs-grid,
+  .programs-skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .programs-initiatives-section {
+    padding: 32px 20px;
+  }
+
+  .initiative-tab {
+    padding: 9px 14px;
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .programs-hero {
+    padding: calc(var(--nav-h) + 32px) 0 48px;
+  }
+
+  /* 320px: the skeleton accent bar bleeds 24px each side of a 24px-padded card;
+     without this the page picked up a horizontal scrollbar. */
+  .programs-skeleton-card {
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  .programs-modal-overlay {
+    padding: 12px;
+  }
+
+  .programs-modal-title {
+    font-size: 1.02rem;
+  }
+
+  .programs-modal-body {
+    padding: 20px;
+  }
+
+  .programs-modal-header {
+    padding: 18px 20px;
+  }
+
+  .program-card-body {
+    padding: 24px 20px 20px;
+  }
+}
+
+/* ============================================================
+   16. REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .program-card-v2,
+  .initiative-grid-card,
+  .initiative-tab,
+  .initiative-link-btn,
+  .programs-modal-card,
+  .programs-modal-overlay,
+  .p-skeleton-bar,
+  .initiative-grid-img {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .programs-hero-bg {
+    background: none;
+  }
+}

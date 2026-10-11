@@ -1,0 +1,463 @@
+/* ==========================================
+   PORTALS PAGE — Clean & Compact
+   ========================================== */
+
+.portals-page {
+  padding-bottom: var(--space-7);
+}
+
+.btn-full-width {
+  width: 100%;
+}
+
+/* === Animations === */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleBounce {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.portal-fade-in {
+  animation: fadeInUp 0.3s var(--ease);
+}
+
+
+/* === Hero === */
+.portals-hero {
+  padding: 56px 0 40px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(0, 192, 145, 0.06), transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(0, 154, 248, 0.06), transparent 50%),
+    var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.portals-hero .section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-top: 14px;
+}
+
+.portals-hero .section-lead {
+  margin-inline: auto;
+}
+
+/* Tabs */
+.portals-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 6px;
+  border-radius: 999px;
+  margin-top: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.portal-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-2);
+  background: none;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+
+.portal-tab:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.portal-tab.active {
+  background: var(--gradient-brand);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+
+/* === Partners logos === */
+.partners-showcase-section {
+  padding-bottom: 0;
+}
+
+.partners-group-title {
+  text-align: center;
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.partners-group-title-spaced {
+  margin-top: 40px;
+}
+
+.partners-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 240px));
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.partner-logo-tile {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+[data-theme="dark"] .partner-logo-tile {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.partner-logo-tile:hover {
+  border-color: var(--green-300);
+  transform: translateY(-3px);
+}
+
+/* اللوجو في صفحة الشركاء أكبر شوية من الـ marquee */
+.partner-logo-tile .partner-mark-logo {
+  max-height: 64px;
+  max-width: 100%;
+}
+
+/* الاسم جوه الكارت يقدر يلف على سطرين (في الـ marquee بيفضل سطر واحد) */
+.partner-logo-tile .partner-mark-name {
+  white-space: normal;
+}
+
+/* === Partnership request header === */
+.partnership-request-header {
+  margin-bottom: 32px;
+}
+
+.partnership-request-header .section-title {
+  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+  margin-top: 12px;
+}
+
+.partnership-request-header .portals-tabs {
+  margin-top: 20px;
+}
+
+/* === Content Grid === */
+.portal-content-section {
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 32px;
+  align-items: start;
+}
+
+
+/* === Left: Info Side === */
+.portal-info-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.portal-info-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--text);
+  margin-top: 12px;
+}
+
+.portal-info-desc {
+  color: var(--text-2);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Benefits */
+.portal-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  color: var(--text);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.benefit-item:hover {
+  border-color: var(--green-300);
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .benefit-item:hover {
+  transform: translateX(-4px);
+}
+
+.benefit-icon {
+  color: var(--green-600);
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .benefit-icon {
+  color: var(--green-400);
+}
+
+/* Download Box — Education portal only */
+.portal-download-box {
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--gradient-brand);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+[data-theme="dark"] .portal-download-box {
+  background: linear-gradient(135deg, var(--green-800) 0%, var(--blue-800) 100%);
+}
+
+.download-box-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.download-box-header h4 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.portal-download-box p {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+}
+
+.download-btn {
+  background: #fff;
+  color: var(--green-700);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.download-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.portal-download-note {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}
+
+
+/* === رسائل الخطأ === */
+.portal-alert {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* نفس الرسالة فوق خلفية التدرّج الملوّنة بتاعة صندوق التحميل */
+.portal-alert-on-gradient {
+  background: rgba(0, 0, 0, 0.28);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+
+/* === Right: Form Side === */
+.portal-form-side {
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+
+.portal-form-wrapper {
+  padding: 28px;
+  border-radius: var(--radius);
+}
+
+.portal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.portal-form .form-group {
+  margin-bottom: 0;
+}
+
+.portal-form-header {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
+.portal-form-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* Select arrow */
+.portal-form select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+[dir="rtl"] .portal-form select.form-control {
+  background-position: left 14px center;
+  padding-right: 16px;
+  padding-left: 36px;
+}
+
+.portal-form textarea.form-control {
+  resize: vertical;
+  min-height: 84px;
+  font-family: inherit;
+}
+
+/* Success state — مقصورة على الصفحة لأن أسماء زي .success-icon
+   موجودة كمان في Opportunities.css وبتتحمّل في نفس الرن تايم */
+.portals-page .form-success-state {
+  padding: 32px 0;
+}
+
+.portals-page .success-icon {
+  color: var(--green);
+  margin-bottom: 16px;
+  animation: scaleBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.form-success-state h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.form-success-state p {
+  color: var(--text-2);
+  font-size: 0.92rem;
+}
+
+
+/* === Responsive === */
+@media (max-width: 980px) {
+  .portal-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .portal-form-side {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .portals-hero {
+    padding: 40px 0 32px;
+  }
+
+  .portal-tab {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  .portal-form-wrapper {
+    padding: 20px;
+  }
+
+  .benefit-item {
+    padding: 14px;
+  }
+
+  .portal-download-box {
+    padding: 18px;
+  }
+
+  .partners-logo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .partner-logo-tile {
+    min-height: 80px;
+    padding: 12px;
+  }
+}
+
+/* حركة أقل لمن يطلبها */
+@media (prefers-reduced-motion: reduce) {
+  .portal-fade-in,
+  .portals-page .success-icon {
+    animation: none;
+  }
+
+  .benefit-item:hover,
+  [dir="rtl"] .benefit-item:hover,
+  .download-btn:hover {
+    transform: none;
+  }
+
+  .portal-tab,
+  .benefit-item,
+  .partner-logo-tile {
+    transition: none;
+  }
+
+  .partner-logo-tile:hover {
+    transform: none;
+  }
+}

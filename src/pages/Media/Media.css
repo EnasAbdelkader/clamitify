@@ -1,0 +1,224 @@
+.media-page-container {
+  padding-bottom: var(--space-8);
+}
+
+.media-header {
+  padding-top: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+/* Annual Report — التقرير السنوي */
+.media-report-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 36px 40px;
+  border-radius: 24px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.media-report-text h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-block: 10px 8px;
+  color: var(--text);
+}
+
+.media-report-text p {
+  color: var(--text-2);
+  max-width: 55ch;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.media-report-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  padding: 12px 24px;
+}
+
+@media (max-width: 980px) {
+  .media-report-section {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .media-report-text p {
+    margin-inline: auto;
+  }
+
+  .media-report-btn {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .media-report-section {
+    padding: 24px;
+  }
+}
+
+/* الحالات الثلاث (تحميل / خطأ / فاضي) بتقعد في نفس المساحة بدل قسم فاضي */
+.media-posts {
+  min-height: 320px;
+}
+
+.posts-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.post-large-card {
+  padding: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 24px !important;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
+}
+
+[data-theme="dark"] .post-large-card {
+  background: #111a2e !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.post-large-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elegant);
+}
+
+.post-img-cover-area {
+  height: 200px;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.post-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-category-tag-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--gradient-brand-soft);
+  color: var(--green-700);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 99px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+[data-theme="dark"] .post-category-tag-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--green-300);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[dir="rtl"] .post-category-tag-badge {
+  left: auto;
+  right: 14px;
+}
+
+.post-text-content-area {
+  padding: 16px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+}
+
+.post-meta-details-row {
+  display: flex;
+  gap: 16px;
+  color: var(--text-2);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.post-meta-details-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.post-text-content-area h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.post-text-content-area .excerpt {
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.read-post-action-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--navy) !important;
+  color: #ffffff !important;
+  border-radius: 99px !important;
+  width: 100% !important;
+  font-weight: 700 !important;
+  padding: 12px 20px !important;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .read-post-action-btn {
+  background: #ffffff !important;
+  color: #111a2e !important;
+}
+
+.read-post-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-large-card,
+  .post-large-card:hover,
+  .read-post-action-btn,
+  .read-post-action-btn:hover {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .posts-layout-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .posts-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}

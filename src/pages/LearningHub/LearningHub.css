@@ -1,0 +1,580 @@
+.learning-hub-page-container {
+  padding-bottom: var(--space-7);
+}
+
+.hub-header {
+  padding-top: var(--space-6);
+}
+
+/* الحالات الثلاث (تحميل / خطأ / فاضي) بتقعد في نفس المساحة بدل قسم فاضي */
+.hub-content-section {
+  min-height: 320px;
+}
+
+.courses-grid-list-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.course-card-item {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card-img-banner {
+  height: 220px;
+  position: relative;
+}
+
+.course-cover-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.course-badge-category {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: var(--gradient-brand);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 99px;
+  box-shadow: var(--shadow-sm);
+}
+
+[dir="rtl"] .course-badge-category {
+  left: auto;
+  right: 12px;
+}
+
+.course-card-body-details {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+}
+
+.course-card-body-details h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.course-card-body-details .excerpt {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.course-meta-data-badges {
+  display: flex;
+  gap: 16px;
+  color: var(--text-3);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.course-meta-data-badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.start-course-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Active Course Panel */
+.active-course-study-panel {
+  padding: 32px;
+}
+
+.back-to-list-btn {
+  margin-bottom: 24px;
+}
+
+.active-course-header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 32px;
+}
+
+.active-course-thumbnail-wrapper {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  max-height: 280px;
+}
+
+.active-course-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.active-course-main-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.course-category-tag {
+  background: var(--gradient-brand-soft);
+  color: var(--green-700);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 99px;
+}
+
+[data-theme="dark"] .course-category-tag {
+  color: var(--green-300);
+}
+
+.instructor-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-2);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.course-stats-badges-row {
+  display: flex;
+  gap: 20px;
+  color: var(--text-3);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.course-stats-badges-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.active-course-main-details .full-description {
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+/* Simulated Lessons */
+.lessons-simulator-list-box {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lessons-simulator-list-box h4 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.lesson-item-simulated {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.lessons-box-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lessons-progress-summary {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+/* .btn-sm مش متعرّف في global.css، فأزرار الدروس كانت بتطلع بحجم كامل.
+   القائمة بقت بتعرض عدد الدروس الحقيقي (12 مثلاً) فلازم تكون مضغوطة. */
+.lesson-item-simulated .btn {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.lesson-status-completed {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+.lesson-item-simulated.lock-state {
+  opacity: 0.6;
+  background: var(--surface-2);
+}
+
+.lock-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-3);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.progress-badge {
+  color: var(--green-700);
+  font-weight: 800;
+}
+
+[data-theme="dark"] .progress-badge {
+  color: var(--green-300);
+}
+
+.view-certificate-btn {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ==========================================
+   CERTIFICATE DIALOG
+   الكلاسات دي مكانت متعرّفة في أي ستايل شيت في المشروع، فالـ "modal"
+   كان بيتعرض كبلوك عادي جوه الصفحة. مستخدَمة في هذه الصفحة فقط.
+   ========================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  /* لازم تعلى على الهيدر (99990) وشريط الموبايل والشات (99996) */
+  z-index: var(--z-dialog, 100000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgba(18, 33, 51, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  overflow-y: auto;
+  animation: certOverlayIn 0.2s var(--ease) both;
+}
+
+[data-theme="dark"] .modal-overlay {
+  background: rgba(7, 13, 23, 0.7);
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - var(--space-6));
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-5);
+  animation: certPanelIn 0.24s var(--ease) both;
+}
+
+/* الحوار نفسه ما يتحركش عند الـ hover زي الكروت العادية */
+.modal-content.card:hover {
+  transform: none;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-content:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.certificate-modal {
+  max-width: 680px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.modal-title svg {
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+.btn-close {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-2);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-close:hover {
+  color: var(--text);
+  border-color: var(--border-interactive);
+}
+
+.btn-close:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+
+/* ورقة الشهادة */
+.certificate-paper-body {
+  border: 3px double var(--green);
+  padding: 32px 24px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  margin: 20px 0;
+}
+
+.certificate-seal {
+  color: var(--green);
+  margin: 0 auto 12px;
+}
+
+.certificate-heading {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 8px 0;
+  color: var(--text);
+}
+
+.certificate-preamble {
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+.certificate-recipient {
+  color: var(--green-700);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 12px 0;
+}
+
+[data-theme="dark"] .certificate-recipient {
+  color: var(--green-300);
+}
+
+.certificate-statement {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.certificate-meta-row {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+
+@keyframes certOverlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes certPanelIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay,
+  .modal-content {
+    animation: none;
+  }
+
+  .course-card-item,
+  .course-card-item:hover,
+  .btn-close {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .courses-grid-list-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .active-course-header-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .lesson-item-simulated {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .certificate-paper-body {
+    padding: 24px 16px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   Session Recordings — تسجيلات جلسات SHIFT
+   ========================================== */
+
+.hub-recordings-header {
+  margin-bottom: 32px;
+}
+
+.hub-recordings-header .section-title {
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  margin-top: 12px;
+}
+
+.hub-recordings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card.hub-recording-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+}
+
+.hub-recording-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  color: #fff;
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-elegant);
+}
+
+.hub-recording-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.hub-recording-body h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.hub-recording-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.hub-recording-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 900px) {
+  .hub-recordings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .card.hub-recording-card {
+    flex-wrap: wrap;
+  }
+
+  .hub-recording-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Learning Content Partners — شركاء محتوى التعلم */
+.hub-partners-section {
+  margin-bottom: var(--space-6);
+}
+
+.hub-partners-title {
+  margin-bottom: 18px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
+}

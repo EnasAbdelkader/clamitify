@@ -1,0 +1,1287 @@
+/* ============================================================
+   EVENTS PAGE — PREMIUM REDESIGN
+   Follows project conventions: var(--...) tokens, [data-theme="dark"]
+   overrides with #111a2e, [dir="rtl"] adjustments, same transition
+   patterns and breakpoints as Home/Media pages.
+   ============================================================ */
+
+.events-page-container {
+  padding-bottom: var(--space-8);
+}
+
+/* ============================================================
+   1. HERO SECTION — Dark gradient with decorative blobs + stats
+   ============================================================ */
+
+.events-hero {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  padding: calc(var(--nav-h) + 48px) 0 64px;
+  background: linear-gradient(135deg, #0b1422 0%, #122133 45%, #0a1f33 100%);
+}
+
+.events-hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Light green tinted overlay — keeps the bright nature image visible while ensuring text contrast */
+.events-hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(8, 60, 40, 0.55) 0%, rgba(6, 75, 48, 0.45) 50%, rgba(10, 50, 35, 0.60) 100%),
+    radial-gradient(circle at 12% 18%, rgba(0, 192, 145, 0.18), transparent 45%),
+    radial-gradient(circle at 88% 82%, rgba(0, 200, 120, 0.20), transparent 45%);
+}
+
+/* Smooth fade from hero into page background */
+.events-hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.events-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.events-hero-content {
+  max-width: 720px;
+}
+
+.events-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.events-hero-title {
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-top: 20px;
+  text-shadow: 0 2px 12px rgba(0, 40, 25, 0.5);
+}
+
+.events-hero-lead {
+  margin-top: 18px;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 60ch;
+  text-shadow: 0 1px 8px rgba(0, 40, 25, 0.4);
+}
+
+
+
+/* ============================================================
+   2. MAIN CONTENT WRAPPER
+   ============================================================ */
+
+.events-main-content {
+  position: relative;
+  z-index: 2;
+  margin-top: -24px;
+}
+
+/* ============================================================
+   3. FEATURED EVENT BANNER
+   ============================================================ */
+
+.featured-event-section {
+  margin-bottom: 40px;
+}
+
+.featured-event-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .featured-event-banner {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.featured-event-banner:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-float);
+}
+
+/* Accent strip on the leading edge (logical — flips automatically in RTL) */
+.featured-event-accent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: 0;
+  width: 6px;
+  background: var(--gradient-brand);
+}
+
+/* Category-specific accent colors */
+.featured-event-banner.cat-outreach .featured-event-accent {
+  background: linear-gradient(180deg, var(--green-400), var(--green-700));
+}
+.featured-event-banner.cat-digital .featured-event-accent {
+  background: linear-gradient(180deg, var(--blue-400), var(--blue-700));
+}
+.featured-event-banner.cat-hackathon .featured-event-accent {
+  background: linear-gradient(180deg, var(--green-500), var(--blue-500));
+}
+
+.featured-event-body {
+  padding: clamp(28px, 4vw, 44px);
+  /* مساحة إضافية جنب الشريط الملوّن — منطقية عشان تلف مع اتجاه الصفحة */
+  padding-inline-start: calc(clamp(28px, 4vw, 44px) + 12px);
+}
+
+.featured-event-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.featured-event-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-elegant);
+  flex-shrink: 0;
+}
+
+.featured-event-banner.cat-outreach .featured-event-icon-wrap {
+  background: linear-gradient(135deg, var(--green-400), var(--green-700));
+}
+.featured-event-banner.cat-digital .featured-event-icon-wrap {
+  background: linear-gradient(135deg, var(--blue-400), var(--blue-700));
+}
+.featured-event-banner.cat-hackathon .featured-event-icon-wrap {
+  background: linear-gradient(135deg, var(--green-500), var(--blue-500));
+}
+
+.featured-event-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green-700);
+}
+
+[data-theme="dark"] .featured-event-label {
+  color: var(--green-300);
+}
+
+.featured-event-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.featured-event-desc {
+  color: var(--text-2);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin-bottom: 20px;
+  max-width: 70ch;
+}
+
+.featured-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.featured-event-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.featured-event-btn {
+  min-width: 200px;
+}
+
+/* ============================================================
+   4. TOOLBAR — Search + Filter Pills
+   ============================================================ */
+
+.events-toolbar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .events-toolbar {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Search */
+.events-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  align-items: center;
+}
+
+.events-search-icon {
+  position: absolute;
+  inset-inline-start: 14px;
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.events-search-input {
+  width: 100%;
+  /* بداية أوسع عشان أيقونة البحث، ونهاية أضيق لزرار المسح */
+  padding-block: 11px;
+  padding-inline: 42px 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* outline: none أعلاه لازم يقابله مؤشر تركيز واضح */
+.events-search-input:focus,
+.events-search-input:focus-visible {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px var(--green-50);
+}
+
+[data-theme="dark"] .events-search-input:focus,
+[data-theme="dark"] .events-search-input:focus-visible {
+  box-shadow: 0 0 0 4px rgba(0, 192, 145, 0.15);
+}
+
+.events-search-input::placeholder {
+  color: var(--text-3);
+}
+
+.events-search-clear {
+  position: absolute;
+  inset-inline-end: 10px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: var(--text-3);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.events-search-clear:hover,
+.events-search-clear:focus-visible {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Filter Pills */
+.events-filter-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-2);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  transition: all 0.25s ease;
+}
+
+/* الاستثناء بالـ :not بدل !important — الحبّة النشطة ما بتتأثرش بألوان الـ hover */
+.filter-pill:not(.filter-pill--active):hover,
+.filter-pill:not(.filter-pill--active):focus-visible {
+  border-color: var(--green);
+  color: var(--green-700);
+}
+
+[data-theme="dark"] .filter-pill:not(.filter-pill--active):hover,
+[data-theme="dark"] .filter-pill:not(.filter-pill--active):focus-visible {
+  color: var(--green-300);
+}
+
+.filter-pill--active {
+  background: var(--gradient-brand);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: var(--shadow-elegant);
+}
+
+.filter-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.08);
+  color: inherit;
+}
+
+.filter-pill--active .filter-pill-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="dark"] .filter-pill-count {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   5. EVENTS GRID
+   ============================================================ */
+
+.events-grid-section {
+  margin-bottom: var(--space-6);
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ============================================================
+   6. EVENT CARD V2
+   ============================================================ */
+
+.event-card-v2 {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .event-card-v2 {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* بيتكتب بعد قاعدة الـ dark بنفس الترتيب عشان يكسبها من غير !important */
+.event-card-v2:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elegant);
+  border-color: var(--green);
+}
+
+/* فعالية انتهت — بتفضل ظاهرة للأرشيف بس مطفية بصرياً ومقفولة للتسجيل */
+.event-card-v2--past {
+  opacity: 0.68;
+}
+
+.event-card-v2--past:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border);
+  opacity: 1;
+}
+
+[data-theme="dark"] .event-card-v2--past:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Top accent bar — category-colored */
+.event-card-accent-bar {
+  height: 5px;
+  width: 100%;
+  background: var(--gradient-brand);
+  flex-shrink: 0;
+}
+
+.event-card-v2.cat-outreach .event-card-accent-bar {
+  background: linear-gradient(90deg, var(--green-400), var(--green-700));
+}
+.event-card-v2.cat-digital .event-card-accent-bar {
+  background: linear-gradient(90deg, var(--blue-400), var(--blue-700));
+}
+.event-card-v2.cat-hackathon .event-card-accent-bar {
+  background: linear-gradient(90deg, var(--green-500), var(--blue-500));
+}
+
+.event-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Top row: icon + date badge */
+.event-card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.event-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.event-card-v2.cat-outreach .event-card-icon {
+  background: linear-gradient(135deg, var(--green-400), var(--green-700));
+}
+.event-card-v2.cat-digital .event-card-icon {
+  background: linear-gradient(135deg, var(--blue-400), var(--blue-700));
+}
+.event-card-v2.cat-hackathon .event-card-icon {
+  background: linear-gradient(135deg, var(--green-500), var(--blue-500));
+}
+
+.event-date-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--gradient-brand-soft);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .event-date-badge {
+  background: rgba(0, 192, 145, 0.12);
+  border-color: rgba(0, 192, 145, 0.2);
+}
+
+.event-date-day {
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--green-700);
+}
+
+[data-theme="dark"] .event-date-day {
+  color: var(--green-300);
+}
+
+.event-date-month {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--green-700);
+  margin-top: 2px;
+}
+
+[data-theme="dark"] .event-date-month {
+  color: var(--green-300);
+}
+
+/* Category tag + status badge row */
+.event-card-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.event-past-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: var(--warning);
+  background: var(--warning-bg);
+  border: 1px solid var(--border);
+}
+
+.event-card-cat {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--green-700);
+  background: var(--gradient-brand-soft);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  align-self: flex-start;
+}
+
+[data-theme="dark"] .event-card-cat {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--green-300);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Title */
+.event-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+/* Description */
+.event-card-desc {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+/* Meta row */
+.event-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.event-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-2);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Register button */
+.event-card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--navy);
+  color: #ffffff;
+  border-radius: 99px;
+  width: 100%;
+  font-weight: 700;
+  padding: 11px 20px;
+  font-size: 0.88rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: auto;
+}
+
+[data-theme="dark"] .event-card-btn {
+  background: #ffffff;
+  color: #111a2e;
+}
+
+.event-card-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* فعالية منتهية — الزرار مقفول ومبيّن كده */
+.event-card-btn:disabled {
+  cursor: not-allowed;
+  background: var(--surface-2);
+  color: var(--text-3);
+  border: 1px solid var(--border);
+  transform: none;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .event-card-btn:disabled {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-3);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   7. EMPTY STATE
+   حالات الفراغ بقت من مكوّن EmptyState المشترك (ui/EmptyState.tsx)،
+   فمفيش هنا أنماط خاصة بيها.
+   ============================================================ */
+
+/* ============================================================
+   8. ERROR STATE
+   ============================================================ */
+
+.events-error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 100px 24px;
+}
+
+.events-error-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.events-error-state h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.events-error-state p {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  max-width: 48ch;
+}
+
+.events-retry-btn {
+  margin-top: 24px;
+  min-width: 180px;
+}
+
+/* ============================================================
+   9. SKELETON LOADING
+   ============================================================ */
+
+.events-skeleton-hero {
+  height: 360px;
+  background: linear-gradient(135deg, #0b1422 0%, #122133 100%);
+}
+
+.events-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 40px;
+}
+
+.events-skeleton-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.skeleton-bar {
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    var(--surface-2) 50%,
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-accent {
+  height: 5px;
+  width: 100%;
+  border-radius: 0;
+  margin: -24px -24px 12px -24px;
+  width: calc(100% + 48px);
+}
+
+.skeleton-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 80%;
+}
+
+.skeleton-text {
+  height: 14px;
+  width: 100%;
+}
+
+.skeleton-text:last-of-type {
+  width: 65%;
+}
+
+.skeleton-btn {
+  height: 42px;
+  border-radius: 99px;
+  margin-top: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================================
+   10. MODAL V2 — Accessible registration dialog
+   ============================================================ */
+
+.modal-overlay-v2 {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 13, 23, 0.88);
+  /* الهيدر والشريط السفلي عند 99990 والشات عند 99996 — الديالوج لازم يعلاهم */
+  z-index: var(--z-dialog);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-card-v2 {
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-card-v2:focus {
+  outline: none;
+}
+
+.modal-card-v2:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] .modal-card-v2 {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Modal Accent Header */
+.modal-accent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px;
+  background: var(--gradient-brand-soft);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-theme="dark"] .modal-accent-header {
+  background: rgba(0, 192, 145, 0.08);
+}
+
+.modal-accent-header.cat-outreach {
+  background: linear-gradient(135deg, rgba(0, 192, 145, 0.12), rgba(2, 130, 99, 0.06));
+}
+.modal-accent-header.cat-digital {
+  background: linear-gradient(135deg, rgba(0, 154, 248, 0.12), rgba(6, 109, 177, 0.06));
+}
+.modal-accent-header.cat-hackathon {
+  background: linear-gradient(135deg, rgba(0, 192, 145, 0.08), rgba(0, 154, 248, 0.08));
+}
+
+[data-theme="dark"] .modal-accent-header.cat-outreach {
+  background: linear-gradient(135deg, rgba(0, 192, 145, 0.1), rgba(0, 0, 0, 0));
+}
+[data-theme="dark"] .modal-accent-header.cat-digital {
+  background: linear-gradient(135deg, rgba(0, 154, 248, 0.1), rgba(0, 0, 0, 0));
+}
+[data-theme="dark"] .modal-accent-header.cat-hackathon {
+  background: linear-gradient(135deg, rgba(0, 192, 145, 0.06), rgba(0, 154, 248, 0.06));
+}
+
+.modal-header-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-header-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.modal-accent-header.cat-outreach .modal-header-icon {
+  background: linear-gradient(135deg, var(--green-400), var(--green-700));
+}
+.modal-accent-header.cat-digital .modal-header-icon {
+  background: linear-gradient(135deg, var(--blue-400), var(--blue-700));
+}
+.modal-accent-header.cat-hackathon .modal-header-icon {
+  background: linear-gradient(135deg, var(--green-500), var(--blue-500));
+}
+
+.modal-header-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-bottom: 2px;
+}
+
+.modal-header-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.modal-close-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--text-3);
+  transition: background 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.modal-close-btn:hover:not(:disabled),
+.modal-close-btn:focus-visible {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.modal-close-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Modal Body */
+.modal-body-content {
+  padding: 28px;
+}
+
+/* Event quick info */
+.modal-event-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-info-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+/* Form */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-form .form-group {
+  margin-bottom: 0;
+}
+
+.modal-form label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.modal-form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* outline: none أعلاه لازم يقابله مؤشر تركيز واضح */
+.modal-form-input:focus,
+.modal-form-input:focus-visible {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px var(--green-50);
+}
+
+[data-theme="dark"] .modal-form-input:focus,
+[data-theme="dark"] .modal-form-input:focus-visible {
+  box-shadow: 0 0 0 4px rgba(0, 192, 145, 0.15);
+}
+
+.modal-form-input::placeholder {
+  color: var(--text-3);
+}
+
+.modal-form-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* رسالة فشل التسجيل — جوّه الـ modal ومعلنة بـ role="alert" */
+.modal-form-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  font-weight: 600;
+  color: var(--danger);
+  background: var(--danger-bg);
+  border: 1px solid var(--danger);
+}
+
+.modal-form-error svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.modal-submit-btn {
+  margin-top: 8px;
+  height: 48px;
+  border-radius: 99px;
+  font-weight: 700;
+  width: 100%;
+}
+
+.modal-submit-btn:disabled,
+.modal-submit-btn:disabled:hover {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success State */
+.modal-success-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 0;
+}
+
+.modal-success-icon {
+  color: var(--green);
+  margin-bottom: 16px;
+}
+
+.modal-success-state h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.modal-success-state p {
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 40ch;
+}
+
+.modal-close-action {
+  min-width: 140px;
+}
+
+/*
+  ملخص الحجز — بيحافظ على شكل بطاقة التذكرة القديمة (إطار متقطّع بلون العلامة)
+  من غير ما يدّعي إنه تذكرة قابلة للمسح. الكود القديم كان بيولّد نفس الرقم
+  لكل الحاضرين والـ QR كان رسمة ثابتة.
+*/
+.registration-summary-card {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 20px;
+  padding: 18px 20px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px dashed var(--green);
+  border-radius: 12px;
+  background: var(--gradient-brand-soft);
+}
+
+.registration-summary-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--green-700);
+}
+
+[data-theme="dark"] .registration-summary-label {
+  color: var(--green-300);
+}
+
+/* لازم يكسب `.modal-success-state p` اللي فوق (نفس العنصر، تخصيص أعلى) */
+.modal-success-state .registration-summary-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--text);
+  max-width: none;
+}
+
+.registration-summary-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+
+.registration-summary-row svg {
+  flex-shrink: 0;
+  color: var(--green-700);
+}
+
+[data-theme="dark"] .registration-summary-row svg {
+  color: var(--green-300);
+}
+
+/* Spinner — الـ @keyframes spin بقى في global.css */
+.spinner-loader-small {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* ============================================================
+   11. KEYFRAMES
+   ============================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   12. RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 980px) {
+  .events-grid,
+  .events-skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featured-event-meta {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 760px) {
+  .events-grid,
+  .events-skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-event-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .events-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .events-search-wrap {
+    min-width: 100%;
+  }
+
+  .events-filter-pills {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-pill {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .events-hero {
+    padding: calc(var(--nav-h) + 32px) 0 48px;
+  }
+
+  .featured-event-body {
+    padding: 24px;
+    padding-inline-start: calc(24px + 8px);
+  }
+
+  .modal-body-content {
+    padding: 20px;
+  }
+
+  .modal-accent-header {
+    padding: 18px 20px;
+  }
+}
+
+/* ============================================================
+   13. REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .event-card-v2,
+  .featured-event-banner,
+  .filter-pill,
+  .events-search-input,
+  .events-search-clear,
+  .event-card-btn,
+  .modal-close-btn,
+  .modal-form-input,
+  .modal-card-v2,
+  .modal-overlay-v2,
+  .skeleton-bar {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* الرفع عند الـ hover حركة تزيينية بحتة */
+  .event-card-v2:hover,
+  .featured-event-banner:hover,
+  .event-card-btn:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .events-hero-bg {
+    background: none;
+  }
+}

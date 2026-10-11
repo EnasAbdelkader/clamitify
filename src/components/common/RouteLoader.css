@@ -1,0 +1,29 @@
+.route-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  width: 100%;
+}
+
+.route-loader-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--border, #e2eaf1);
+  border-top-color: var(--green, #00c091);
+  /* Local keyframes — never rely on a name defined in another route's chunk. */
+  animation: route-loader-spin 0.8s linear infinite;
+}
+
+@keyframes route-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-loader-spinner {
+    animation-duration: 2.4s;
+  }
+}

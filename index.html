@@ -1,0 +1,107 @@
+<!doctype html>
+<!-- الافتراضي عربي / RTL لأن الجمهور الأساسي عربي — والسكربت أدناه يصحّحه قبل أول رسم -->
+<html lang="ar" dir="rtl" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      يجب أن ينفّذ هذا السكربت قبل أول رسم للصفحة.
+      بدونه كان الـ HTML يبدأ بـ lang="en" بلا dir ثم يصححه React في تأثير
+      بعد الرسم، فيرى المستخدم انقلاب التخطيط بالكامل في كل تحميل بارد.
+      كل شيء داخل try/catch لأن localStorage محجوب في وضع Safari الخاص.
+    -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var lang = "ar";
+        var theme = null;
+        try {
+          var storedLang = localStorage.getItem("climatify-lang");
+          if (storedLang === "en" || storedLang === "ar") lang = storedLang;
+          var storedTheme = localStorage.getItem("climatify-theme");
+          if (storedTheme === "light" || storedTheme === "dark") theme = storedTheme;
+        } catch (e) {
+          /* التخزين محجوب — نكمل بالقيم الافتراضية */
+        }
+        if (!theme) {
+          try {
+            theme =
+              window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          } catch (e) {
+            theme = "light";
+          }
+        }
+        root.setAttribute("lang", lang);
+        root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+        root.setAttribute("data-theme", theme);
+
+        // نفس القيم اللي في ThemeContext (THEME_COLORS) — من غير التحديث ده
+        // شريط المتصفح على الموبايل بيفضل بلون فاتح حتى بعد تشغيل React.
+        var themeColorMeta = document.getElementById("theme-color-meta");
+        if (themeColorMeta) {
+          themeColorMeta.setAttribute("content", theme === "dark" ? "#0A1018" : "#F7FAFC");
+        }
+      })();
+    </script>
+
+    <title>Climatify — من الشباب إلى الشباب | From Youth to Youth</title>
+    <meta
+      name="description"
+      content="كلايمتيفاي شركة ناشئة إماراتية تجمع بين الرقمنة المناخية وتمكين المجتمعات — نوحّد الجهود ونبتكر الحلول ونتحرك من أجل مستقبل أكثر استدامة. Climatify is a UAE-based startup uniting climate digitization with community empowerment — from youth to youth."
+    />
+    <meta name="author" content="Climatify" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <!--
+      لا نضع rel="canonical" هنا: هذا الملف يُخدَم لكل المسارات، فوسم canonical
+      ثابت يخبر محركات البحث أن كل صفحة هي الصفحة الرئيسية. يحتاج الأمر
+      إلى وسوم لكل مسار (انظر needsFollowUp).
+    -->
+
+    <!-- لون شريط المتصفح — يُحدّثه ThemeContext ليطابق المظهر المختار فعلاً -->
+    <meta name="theme-color" id="theme-color-meta" content="#F7FAFC" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!--
+      global.css يستورد الخطين عبر @import، ما يعني أن المتصفح لا يعرف عنهما
+      حتى ينزّل ملف CSS بالكامل. preconnect يفتح الاتصال مبكراً ويوازي التحميل.
+    -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.fontshare.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Climatify" />
+    <meta property="og:locale" content="ar_AE" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:title" content="Climatify — من الشباب إلى الشباب" />
+    <meta
+      property="og:description"
+      content="شركة ناشئة إماراتية تجمع بين الرقمنة المناخية وتمكين المجتمعات — نوحّد جهود العمل المناخي من الشباب إلى الشباب."
+    />
+    <!-- og:image لا يقبل مساراً نسبياً — النطاق مُستنتج من info@climatify-youth.com فأكّده -->
+    <meta property="og:image" content="https://climatify-youth.com/clipboard-image-1784502037.webp" />
+    <meta property="og:image:alt" content="Climatify — Climate action, digitized" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Climatify — من الشباب إلى الشباب" />
+    <meta
+      name="twitter:description"
+      content="شركة ناشئة إماراتية تجمع بين الرقمنة المناخية وتمكين المجتمعات — نوحّد جهود العمل المناخي من الشباب إلى الشباب."
+    />
+    <meta name="twitter:image" content="https://climatify-youth.com/clipboard-image-1784502037.webp" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

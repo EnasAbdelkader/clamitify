@@ -1,0 +1,292 @@
+.chroma-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 320px));
+  grid-auto-rows: auto;
+  justify-content: center;
+  gap: 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  --x: 50%;
+  --y: 50%;
+  --r: 220px;
+}
+
+@media (max-width: 1124px) {
+  .chroma-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .chroma-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+.chroma-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--card-gradient);
+  margin: 0 auto;
+
+  /* التأثير المطلوب: الكارت بالكامل أبيض وأسود افتراضياً */
+  filter: grayscale(100%) brightness(0.85) contrast(1.1);
+  transition: filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  will-change: filter, transform;
+
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(255, 255, 255, 0.3);
+}
+
+/* الكارت اللي عليه رابط بيبقى <a> — نشيل ستايل اللينك الافتراضي */
+.chroma-card-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* عند الـ Hover (أو التركيز بالكيبورد) يتلون الكارت بالكامل بخلفياته وألوانه ومؤثراته */
+.chroma-card:hover,
+.chroma-card-link:focus-visible {
+  filter: grayscale(0%) brightness(1.05) contrast(1.02);
+  border-color: var(--card-border);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 24px -2px var(--card-border);
+  z-index: 5;
+}
+
+.chroma-card-link:focus-visible {
+  outline: 3px solid var(--card-border);
+  outline-offset: 3px;
+}
+
+.chroma-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 2;
+}
+
+.chroma-card:hover::before {
+  opacity: 1;
+}
+
+.chroma-img-wrapper {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding: 10px;
+  box-sizing: border-box;
+  background: transparent;
+  transition: background 0.3s ease;
+  aspect-ratio: 1 / 1;
+}
+
+.chroma-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  filter: grayscale(100%) brightness(0.9) contrast(1.1);
+  transition: filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, transform;
+}
+
+.chroma-card:hover .chroma-img-wrapper img,
+.chroma-card-link:focus-visible .chroma-img-wrapper img {
+  filter: grayscale(0%) brightness(1.05) contrast(1.02);
+  transform: scale(1.04);
+}
+
+/* بديل الصورة لما تفشل في التحميل — أول حرف من الاسم، من غير صور غريبة من الإنترنت */
+.chroma-img-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.chroma-img-fallback span {
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1;
+}
+
+.chroma-info {
+  position: relative;
+  z-index: 1;
+  padding: 0.75rem 1rem 1.25rem;
+  color: var(--white);
+  font-family: inherit;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: 0.25rem;
+  column-gap: 0.75rem;
+  text-align: start;
+}
+
+.chroma-info .name {
+  grid-column: 1;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.chroma-info .handle {
+  grid-column: 2;
+  align-self: center;
+  font-size: 0.825rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.chroma-info .role {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.4;
+}
+
+.chroma-info .location {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* الـ Spotlight Glow Masks من React Bits */
+.chroma-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  backdrop-filter: grayscale(1) brightness(0.78);
+  -webkit-backdrop-filter: grayscale(1) brightness(0.78);
+  background: rgba(0, 0, 0, 0.001);
+
+  mask-image: radial-gradient(
+    circle var(--r) at var(--x) var(--y),
+    transparent 0%,
+    transparent 15%,
+    rgba(0, 0, 0, 0.1) 30%,
+    rgba(0, 0, 0, 0.22) 45%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0.68) 88%,
+    white 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle var(--r) at var(--x) var(--y),
+    transparent 0%,
+    transparent 15%,
+    rgba(0, 0, 0, 0.1) 30%,
+    rgba(0, 0, 0, 0.22) 45%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0.68) 88%,
+    white 100%
+  );
+}
+
+.chroma-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  backdrop-filter: grayscale(1) brightness(0.78);
+  -webkit-backdrop-filter: grayscale(1) brightness(0.78);
+  background: rgba(0, 0, 0, 0.001);
+
+  mask-image: radial-gradient(
+    circle var(--r) at var(--x) var(--y),
+    white 0%,
+    white 15%,
+    rgba(255, 255, 255, 0.9) 30%,
+    rgba(255, 255, 255, 0.78) 45%,
+    rgba(255, 255, 255, 0.65) 60%,
+    rgba(255, 255, 255, 0.5) 75%,
+    rgba(255, 255, 255, 0.32) 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle var(--r) at var(--x) var(--y),
+    white 0%,
+    white 15%,
+    rgba(255, 255, 255, 0.9) 30%,
+    rgba(255, 255, 255, 0.78) 45%,
+    rgba(255, 255, 255, 0.65) 60%,
+    rgba(255, 255, 255, 0.5) 75%,
+    rgba(255, 255, 255, 0.32) 88%,
+    transparent 100%
+  );
+
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+/* ==========================================================
+   أجهزة اللمس / الشاشات الصغيرة:
+   مفيش hover أصلاً، فالكروت كانت بتفضل رمادية للأبد.
+   بنعرضها بحالتها الملوّنة وبنقفل طبقتين الـ backdrop-filter
+   (أغلى كومبينيشن في الـ compositing) لأنها بلا فايدة هنا.
+   ========================================================== */
+@media (hover: none), (pointer: coarse), (max-width: 900px) {
+  .chroma-card {
+    filter: none;
+    border-color: var(--card-border);
+  }
+
+  .chroma-img-wrapper img {
+    filter: none;
+  }
+
+  .chroma-overlay,
+  .chroma-fade {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chroma-card,
+  .chroma-img-wrapper img,
+  .chroma-card::before,
+  .chroma-fade {
+    transition: none;
+  }
+
+  .chroma-card:hover,
+  .chroma-card-link:focus-visible {
+    transform: none;
+  }
+
+  .chroma-card:hover .chroma-img-wrapper img,
+  .chroma-card-link:focus-visible .chroma-img-wrapper img {
+    transform: none;
+  }
+}

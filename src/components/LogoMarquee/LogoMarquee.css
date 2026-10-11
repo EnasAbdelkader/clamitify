@@ -1,0 +1,112 @@
+/* ==========================================
+   Logo Marquee — شريط لوجوهات الشركاء المتحرك
+   The `marquee` keyframes (0 → -50%) live in global.css.
+   ========================================== */
+
+.logo-marquee {
+  /* ltr ثابت: الحركة محسوبة بـ translateX سالب، فلازم البداية تكون من الشمال
+     حتى في الصفحة العربية. النص جوه كل عنصر بياخد اتجاهه الطبيعي. */
+  direction: ltr;
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.logo-marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.logo-marquee:hover .logo-marquee-track,
+.logo-marquee:focus-within .logo-marquee-track {
+  animation-play-state: paused;
+}
+
+.logo-marquee-half {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 16px;
+  padding-inline-end: 16px;
+  margin: 0;
+  list-style: none;
+}
+
+.logo-marquee-item {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 180px;
+  height: 76px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .logo-marquee-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* اللوجوهات خلفيتها شفافة ونصها غامق، فالكارت اللي فيه لوجو بيفضل أبيض حتى في الـ dark mode. */
+[data-theme="dark"] .logo-marquee-item.has-logo,
+[data-theme="dark"] .partner-logo-tile.has-logo {
+  background: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Shared partner tile content — also used by the Partners page grid. */
+.partner-mark-logo {
+  max-height: 48px;
+  max-width: 160px;
+  width: auto;
+  object-fit: contain;
+}
+
+.partner-mark-name {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .logo-marquee-item {
+    min-width: 140px;
+    height: 64px;
+    padding: 10px 16px;
+  }
+
+  .partner-mark-name {
+    font-size: 0.9rem;
+  }
+}
+
+/* من غير حركة: الشريط بيتحول لصف ثابت متوسّط، والنسخ المكررة بتختفي. */
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .logo-marquee-track {
+    animation: none;
+    width: 100%;
+  }
+
+  .logo-marquee-half {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding-inline-end: 0;
+  }
+
+  .logo-marquee-clone,
+  .logo-marquee-item[aria-hidden="true"] {
+    display: none;
+  }
+}

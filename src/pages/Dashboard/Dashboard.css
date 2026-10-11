@@ -1,0 +1,571 @@
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  padding-bottom: var(--space-7);
+  padding-top: var(--space-4);
+  align-items: flex-start;
+}
+
+/* حالة "محتاج تسجيل دخول" / فشل التحميل — بتاخد الصفحة كلها بدل اللوحة */
+.dashboard-gate {
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-8);
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-gate > * {
+  width: 100%;
+  max-width: 620px;
+}
+
+.dashboard-sidebar {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.user-profile-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+}
+
+.avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--gradient-brand-soft);
+  font-size: 2.2rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  color: var(--navy);
+}
+
+.avatar-large.admin-color {
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+}
+
+.user-profile-summary h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.user-profile-summary p {
+  font-size: 0.85rem;
+  color: var(--text-3);
+}
+
+.dashboard-nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dash-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: var(--text-2);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: start;
+}
+
+.dash-nav-btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+  padding-inline-start: 20px;
+}
+
+.dash-nav-btn.active {
+  background: var(--gradient-brand-soft);
+  color: var(--green-700);
+}
+
+[data-theme="dark"] .dash-nav-btn.active {
+  color: var(--green-300);
+}
+
+/* Main content dashboard flow */
+.dashboard-main-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-main-content h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.dashboard-main-content .lead {
+  color: var(--text-2);
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+/* شريط الترحيب + أدوات التقرير (كان inline styles قبل كده) */
+.dash-overview-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dash-report-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* .btn-sm مش متعرّف في global.css — بنضغط الأزرار الصغيرة محلياً */
+.dash-report-tools .btn,
+.dash-event-actions .btn {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.dash-year-select {
+  width: auto;
+  padding: 6px 12px;
+}
+
+.dash-block-spaced {
+  margin-top: 24px;
+}
+
+.dash-chart-block {
+  margin-top: 24px;
+}
+
+/* تنبيه "بيانات توضيحية" فوق الرسم البياني */
+.dash-sample-data-note,
+.dash-local-only-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  border-radius: var(--radius-sm);
+  background: var(--warning-bg);
+  border: 1px solid var(--warning);
+  color: var(--warning);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.dash-sample-data-note svg,
+.dash-local-only-note svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.dash-events-notice {
+  min-height: 1.4em;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--green-700);
+  margin-bottom: 8px;
+}
+
+[data-theme="dark"] .dash-events-notice {
+  color: var(--green-300);
+}
+
+/* User stats grid */
+.user-stats-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stats-metric-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.metric-icon {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  display: grid;
+  place-items: center;
+}
+
+.stats-metric-card h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+
+.stats-metric-card .num {
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+/* Recent Activity list */
+.activities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.activities-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.activity-icon {
+  background: var(--green-50);
+  color: var(--green);
+  font-weight: 700;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.activities-list strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.activities-list p {
+  font-size: 0.88rem;
+  color: var(--text-3);
+}
+
+/* Courses and Events in Dashboard */
+.dash-courses-list, .dash-events-list {
+  padding: 24px;
+}
+
+.dash-course-row, .dash-event-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dash-course-row h4, .dash-event-row h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.dash-course-row .progress-lbl, .dash-event-row .date-lbl {
+  font-size: 0.88rem;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+.dash-event-row .date-lbl {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dash-event-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* تأكيد إلغاء التسجيل — خطوتين، مفيش إلغاء بضغطة واحدة */
+.cancel-confirm-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--danger-bg);
+  border: 1px solid var(--danger);
+}
+
+.cancel-confirm-q {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--danger);
+}
+
+.dash-danger-btn {
+  color: var(--danger);
+}
+
+.dash-danger-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.dash-progress-fill-bar {
+  flex: 0.4;
+  height: 8px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.dash-progress-fill-bar .fill {
+  height: 100%;
+  background: var(--gradient-brand);
+}
+
+.ticket-badge {
+  background: var(--green-50);
+  color: var(--green-700);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 99px;
+}
+
+/* Admin Dashboard Table */
+.admin-inline-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.admin-list-table-simulated {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.admin-table-row .info strong {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.admin-table-row .info p {
+  font-size: 0.85rem;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.delete-btn-action {
+  color: #ef4444;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-btn-action:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: scale(1.05);
+}
+
+/* Inbox messages */
+.message-item-card {
+  padding: 24px;
+}
+
+.msg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.msg-header h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.msg-subject-badge {
+  background: var(--gradient-brand-soft);
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+.msg-body-content {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* Analytics */
+.analytics-summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.analytics-stat-card {
+  padding: 32px 20px;
+}
+
+.analytics-stat-card h3 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.analytics-stat-card p {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+/* ── حالات فورم الملف الشخصي ──────────────────────────────── */
+.dash-form-error,
+.dash-form-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 14px;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.dash-form-error {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+
+.dash-form-success {
+  background: var(--success-bg);
+  border: 1px solid var(--success);
+  color: var(--success);
+}
+
+.dash-form-error svg,
+.dash-form-success svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.dash-field-error {
+  color: var(--danger);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: start;
+}
+
+.dash-field-hint {
+  color: var(--text-3);
+  font-size: 0.8rem;
+  text-align: start;
+}
+
+.dashboard-container .form-control[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.dashboard-container .form-control[aria-invalid="true"]:focus {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 4px var(--danger-bg);
+}
+
+.dashboard-container .form-control:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.dashboard-container .btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.dash-nav-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash-nav-btn,
+  .dash-nav-btn:hover,
+  .delete-btn-action,
+  .delete-btn-action:hover {
+    transition: none;
+    transform: none;
+  }
+
+  .dash-nav-btn:hover {
+    padding-inline-start: 16px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .admin-inline-form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 760px) {
+  .user-stats-cards-grid, .analytics-summary-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dash-course-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .dash-progress-fill-bar {
+    width: 100%;
+  }
+}

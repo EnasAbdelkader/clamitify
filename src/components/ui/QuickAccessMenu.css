@@ -1,0 +1,130 @@
+.quick-access-container {
+  position: relative;
+  display: inline-block;
+}
+
+.quick-access-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border-interactive);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.quick-access-btn:hover {
+  border-color: var(--green);
+  background: var(--surface-2);
+}
+
+.quick-access-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.quick-access-btn .chevron {
+  transition: transform 0.2s var(--ease);
+}
+
+.quick-access-btn .chevron.rotate {
+  transform: rotate(180deg);
+}
+
+.quick-access-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  /* منطقي: بيتحاذى مع نهاية السطر في اللغتين من غير override */
+  inset-inline-end: 0;
+  width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  /* دروب داون داخل الصفحة، مش مودال — فوق محتوى الصفحة وتحت الهيدر */
+  z-index: var(--z-sticky, 100);
+  animation: quickAccessFadeInDown 0.2s ease-out;
+}
+
+.quick-access-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-label {
+  padding: 6px 12px;
+  font-size: 0.72rem;
+  color: var(--text-muted, var(--text-2));
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: start;
+}
+
+.quick-access-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.88rem;
+  text-align: start;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+}
+
+.quick-access-item:hover {
+  background: var(--gradient-brand-soft);
+  color: var(--green);
+  text-decoration: none;
+}
+
+.quick-access-item:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
+}
+
+.quick-access-item-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted, var(--text-2));
+  transition: color 0.15s var(--ease);
+}
+
+.quick-access-item:hover .quick-access-item-icon,
+.quick-access-item:focus-visible .quick-access-item-icon {
+  color: var(--green);
+}
+
+@keyframes quickAccessFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-access-dropdown {
+    animation: none;
+  }
+
+  .quick-access-btn,
+  .quick-access-item,
+  .quick-access-item-icon,
+  .quick-access-btn .chevron {
+    transition: none;
+  }
+}

@@ -1,0 +1,744 @@
+.home-page-container {
+  width: 100%;
+}
+
+/* ⚠️ `.home-loader-container` / `.spinner` are still consumed by Dashboard,
+   LearningHub, Media and PostDetail, which import NO stylesheet of their own.
+   They must migrate to <RouteLoader /> before these two rules can be deleted —
+   until then removing them leaves those routes with an invisible loader.
+   Home itself no longer uses them. `@keyframes spin` lives in global.css. */
+.home-loader-container {
+  display: grid;
+  place-items: center;
+  min-height: 80vh;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--border);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Loader shown inside a section (not a whole route) — RouteLoader's own 60vh
+   min-height is far too tall for that. */
+.home-section-loader .route-loader {
+  min-height: 220px;
+}
+
+/* One page-level API failure notice, rendered directly under the hero. The three
+   data sections then show a short static line instead of repeating the whole
+   message in three separate aria-live regions. */
+.home-data-error {
+  margin-block: 24px 8px;
+}
+
+.home-section-unavailable {
+  margin: 0;
+  padding: 28px 20px;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 0.95rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+[data-theme="dark"] .home-section-unavailable {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Shared header block for the three homepage sections. Previously two of them
+   used `.section-header-alignment`, a class defined in no stylesheet at all,
+   so they rendered start-aligned while the third was centred. */
+.home-section-header {
+  margin-bottom: 48px;
+}
+
+/* 1. Hero Section */
+.home-hero-section {
+  position: relative;
+  min-height: clamp(540px, 80vh, 760px);
+  width: calc(100% - 20px);
+  max-width: 100%;
+  margin-inline: auto;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+  padding-block: clamp(48px, 7vw, 72px);
+  background-color: #050b14;
+  border-radius: var(--radius-xl, 28px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px -15px rgba(0, 40, 80, 0.5), var(--shadow-lg);
+}
+
+[data-theme="dark"] .home-hero-section {
+  background-color: #040810;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.home-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: opacity 0.4s ease;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+[data-theme="dark"] .home-hero-video {
+  opacity: 0.35;
+}
+
+.home-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(18,33,51,0.55) 0%, rgba(18,33,51,0.35) 40%, rgba(0,40,80,0.65) 100%),
+    linear-gradient(115deg, rgba(18,33,51,0.85) 0%, rgba(0,154,248,0.45) 100%);
+}
+
+[data-theme="dark"] .home-hero-overlay {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Visible pause/play control for the decorative background clip (WCAG 2.2.2). */
+.home-hero-video-toggle {
+  position: absolute;
+  z-index: 4;
+  inset-block-end: 16px;
+  inset-inline-end: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(10, 20, 33, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.home-hero-video-toggle:hover {
+  background: rgba(10, 20, 33, 0.78);
+}
+
+.home-hero-video-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.home-hero-section .aurora-container {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-content-inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 60px;
+  width: 100%;
+}
+
+.home-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 8px;
+  padding-inline: 12px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.hero-main-heading {
+  font-size: clamp(2.6rem, 7vw, 4.8rem);
+  max-width: 32ch; /* تكبير الـ max-width ليتسع العنوان الممركز بشكل جميل */
+  margin-top: 22px;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.hero-subtext {
+  margin-top: 22px;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  max-width: 65ch;
+  margin-inline: auto; /* لتوسيط الفقرة في المنتصف */
+  color: rgba(255,255,255,0.9);
+}
+
+.hero-actions-container {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* لتوسيط أزرار الإجراءات أفقياً */
+  gap: 14px;
+}
+
+/* Stats in Hero
+   NOTE: nothing renders `.hero-stats-grid` / `.stat-card` today — the homepage
+   counters (countries / youth / campaigns / trees) were removed from the JSX.
+   Kept so the markup can be reinstated once a real /api/stats endpoint exists. */
+.hero-stats-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  padding: 20px;
+  border-radius: var(--radius);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 50px -30px rgba(0, 154, 248, 0.6);
+}
+
+.stat-card .num {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.stat-card .lbl {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.82);
+  margin-top: 2px;
+}
+
+/* 2. Mission Section */
+.mission-grid-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.mission-text-area h2 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  margin-top: 12px;
+}
+
+.mission-text-area p {
+  margin-top: 18px;
+  color: var(--text-2);
+  font-size: 1.08rem;
+}
+
+.mission-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vm-card-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 22px;
+  border-radius: inherit;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: 100%;
+}
+
+.icon-tile-wrapper {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--gradient-brand);
+  color: #fff;
+  box-shadow: var(--shadow-elegant);
+}
+
+.vm-card-item h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.vm-card-item p {
+  margin-top: 6px;
+  color: var(--text-2);
+  font-size: 0.98rem;
+}
+
+/* 3. Programs Grid — handled by ProgramCards component */
+
+/* 4. Initiatives Section */
+.initiatives-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Composed with the global `.card`, so the two-class selector wins on
+   specificity — no `!important` arms race needed. */
+.card.initiative-card-item {
+  padding: 16px;
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .card.initiative-card-item {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.card.initiative-card-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elegant);
+}
+
+.initiative-image-header {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--surface-2);
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.initiative-category-badge {
+  position: absolute;
+  top: 14px;
+  inset-inline-start: 14px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 99px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+[data-theme="dark"] .initiative-category-badge {
+  background: rgba(18, 30, 49, 0.85);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.initiative-card-body {
+  padding: 16px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.initiative-card-body h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.initiative-desc {
+  color: var(--text-2);
+  font-size: 0.92rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.initiative-progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+  margin-top: auto;
+}
+
+.progress-stats-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.progress-percentage-text {
+  color: var(--green-700);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .progress-percentage-text {
+  color: var(--green-300);
+}
+
+.progress-bar-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .progress-bar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--gradient-brand);
+  border-radius: 99px;
+}
+
+.target-goal-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--text-2);
+}
+
+.initiative-explore-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--navy);
+  color: #ffffff;
+  border-radius: 99px;
+  width: 100%;
+  font-weight: 700;
+  padding: 12px 20px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .initiative-explore-btn {
+  background: #ffffff;
+  color: #111a2e;
+}
+
+.initiative-explore-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* مبادرة من غير صورة: هيدر بتدرّج ألوان الهوية بدل مساحة فاضية */
+.initiative-image-header.no-image {
+  background-image: var(--gradient-brand);
+}
+
+/* من غير شريط التقدم الزر هو اللي بينزل لآخر الكارت */
+.initiative-desc + .initiative-explore-btn {
+  margin-top: auto;
+}
+
+/* 1c. Partners Logo Marquee */
+.home-partners-strip {
+  padding-block: 8px 28px;
+}
+
+.home-partners-title {
+  margin-bottom: 18px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
+}
+
+/* 5. Latest News */
+.news-cards-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card.news-card-item {
+  padding: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .card.news-card-item {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.card.news-card-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elegant);
+}
+
+.news-thumbnail-banner {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--surface-2);
+  border-radius: 16px;
+}
+
+.news-content-body {
+  padding: 16px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.news-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: 12px;
+}
+
+.news-category-badge {
+  background: var(--gradient-brand-soft);
+  color: var(--green-700);
+  padding: 3px 8px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .news-category-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--green-300);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.news-content-body h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.news-content-body p {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  flex: 1;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.news-read-more-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--navy);
+  color: #ffffff;
+  border-radius: 99px;
+  width: 100%;
+  font-weight: 700;
+  padding: 12px 20px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .news-read-more-link {
+  background: #ffffff;
+  color: #111a2e;
+}
+
+.news-read-more-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive Media */
+@media (max-width: 980px) {
+  .home-hero-section {
+    width: calc(100% - 24px);
+    border-radius: 20px;
+    margin-bottom: 32px;
+  }
+
+  .mission-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .news-cards-grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .initiatives-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-hero-section {
+    width: calc(100% - 16px);
+    border-radius: 16px;
+    padding-block: 32px;
+  }
+
+  .news-cards-grid-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .home-section-header {
+    margin-bottom: 32px;
+  }
+
+  /* 320px: keep the label from being pushed off-screen by the icon + text. */
+  .home-hero-video-toggle {
+    inset-block-end: 10px;
+    inset-inline-end: 10px;
+    padding: 6px 10px;
+    font-size: 0.72rem;
+  }
+}
+
+/* Motion opt-out: no card lifts, no hero transitions. The video itself is never
+   auto-started under this preference (handled in Home.tsx). */
+@media (prefers-reduced-motion: reduce) {
+  .card.initiative-card-item,
+  .card.news-card-item,
+  .initiative-explore-btn,
+  .news-read-more-link,
+  .home-hero-video,
+  .home-hero-video-toggle {
+    transition: none;
+  }
+
+  .card.initiative-card-item:hover,
+  .card.news-card-item:hover,
+  .initiative-explore-btn:hover,
+  .news-read-more-link:hover {
+    transform: none;
+  }
+
+  .spinner {
+    animation-duration: 2.4s;
+  }
+}
+
+/* ==========================================================
+   Impact Band — أرقام الأثر المعتمدة (شريط أسفل الهيرو مباشرة)
+   ========================================================== */
+
+.home-impact-band {
+  padding: 8px 0 0;
+}
+
+.home-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 28px clamp(16px, 4vw, 48px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 8px;
+}
+
+.home-impact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  transition: background 0.25s var(--ease);
+}
+
+.home-impact-item:hover {
+  background: var(--gradient-brand-soft);
+}
+
+.home-impact-value {
+  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.1;
+}
+
+.home-impact-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-2);
+  max-width: 24ch;
+}
+
+@media (max-width: 720px) {
+  .home-impact-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px;
+  }
+
+  .home-impact-item {
+    flex-direction: row;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .home-impact-value {
+    font-size: 1.8rem;
+  }
+
+  .home-impact-label {
+    max-width: none;
+    text-align: start;
+  }
+}

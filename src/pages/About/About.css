@@ -1,0 +1,302 @@
+/* ==========================================
+   CLEAN PREMIUM ABOUT PAGE STYLE
+   ========================================== */
+
+.about-page-container {
+  padding-bottom: var(--space-9);
+}
+
+.about-header-section {
+  padding-top: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+/* Founders Grid */
+.about-team-section {
+  margin-bottom: var(--space-8);
+}
+
+/* The 600px reservation belongs to the populated grid only — when the team is
+   empty or failed to load, an untouched 600px void used to sit here. */
+.about-team-grid-wrap {
+  position: relative;
+  min-height: 600px;
+}
+
+/* فريق العمل والمتدربون تحت شبكة المؤسسين */
+.about-team-groups-wrap {
+  margin-top: var(--space-7);
+}
+
+/* Team loading skeleton — mirrors the ChromaGrid card rhythm so the layout does
+   not jump when the real data arrives. */
+.about-team-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.about-team-skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+[data-theme="dark"] .about-team-skeleton-card {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.about-team-skeleton-avatar,
+.about-team-skeleton-line {
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    var(--surface-2) 50%,
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  animation: about-skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.about-team-skeleton-avatar {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+}
+
+.about-team-skeleton-line {
+  height: 14px;
+  width: 70%;
+}
+
+.about-team-skeleton-line.short {
+  width: 45%;
+  height: 12px;
+}
+
+@keyframes about-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.founders-circular-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px 28px;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.founder-circle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.founder-avatar-frame {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  padding: 5px;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.founder-avatar-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 1.5px;
+  background: var(--gradient-brand);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.founder-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.founder-circle-card:hover {
+  transform: translateY(-4px);
+}
+
+.founder-circle-card:hover .founder-avatar-frame {
+  background: transparent;
+  box-shadow: var(--shadow-elegant);
+}
+
+.founder-circle-card:hover .founder-avatar-frame::before {
+  opacity: 1;
+}
+
+.founder-circle-card:hover .founder-img {
+  transform: scale(1.08);
+}
+
+.founder-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-top: 14px;
+  margin-bottom: 4px;
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+
+.founder-circle-card:hover .founder-name {
+  color: var(--green-700);
+}
+
+[data-theme="dark"] .founder-circle-card:hover .founder-name {
+  color: var(--green-300);
+}
+
+.founder-role {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-3);
+  margin: 0;
+  max-width: 22ch;
+  line-height: 1.4;
+}
+
+/* Designs & Posters — تصاميم وبوسترات برامج التدريب */
+.about-posters-section {
+  margin-bottom: var(--space-7);
+}
+
+.about-posters-header {
+  margin-bottom: 32px;
+}
+
+.about-posters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about-poster-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 360px) 1fr;
+  align-items: center;
+  gap: clamp(20px, 4vw, 40px);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .about-poster-card {
+  background: #111a2e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.about-poster-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.about-poster-body h3 {
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.about-poster-body p {
+  color: var(--text-2);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .founders-circular-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 20px;
+  }
+
+  .about-poster-card {
+    grid-template-columns: 1fr;
+  }
+
+  .about-poster-img {
+    max-width: 420px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 980px) {
+  .about-team-skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-team-grid-wrap {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .founders-circular-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .about-team-skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-poster-card {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .founder-circle-card,
+  .founder-avatar-frame,
+  .founder-img,
+  .founder-name {
+    transition: none;
+  }
+
+  .founder-circle-card:hover,
+  .founder-circle-card:hover .founder-img {
+    transform: none;
+  }
+
+  .about-team-skeleton-avatar,
+  .about-team-skeleton-line {
+    animation: none;
+  }
+}

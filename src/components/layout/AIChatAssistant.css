@@ -1,0 +1,388 @@
+.ai-assistant-wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  /* زر عائم: أعلى من شِل الصفحة وأقل من النوافذ الحوارية (variables.css) */
+  z-index: var(--z-float);
+  font-family: inherit;
+}
+
+.ai-assistant-wrapper.rtl-assistant,
+[dir="rtl"] .ai-assistant-wrapper {
+  right: auto;
+  left: 24px;
+}
+
+/* الزر العائم */
+.ai-floating-trigger-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  color: #fff;
+  border: none;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 30px -5px rgba(0, 154, 248, 0.5);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ai-floating-trigger-btn:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 15px 35px -5px rgba(0, 154, 248, 0.7);
+}
+
+.ai-floating-trigger-btn:active {
+  transform: scale(0.95);
+}
+
+.ai-floating-trigger-btn:focus-visible,
+.ai-close-btn:focus-visible,
+.quick-reply-btn:focus-visible,
+.chat-send-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.ai-badge-pulse {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  background: #10b981;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.ai-badge-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid #10b981;
+  animation: pulse-ring 1.5s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* نافذة الدردشة */
+.ai-chat-window-card {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 380px;
+  height: 520px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 60px -15px rgba(18, 33, 51, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* تمنع المستطيل الحاد خلف البوردر مائل */
+  background-clip: padding-box; /* تمنع بروز الخلفية خارج الحواف */
+}
+
+.rtl-assistant .ai-chat-window-card {
+  right: auto;
+  left: 0;
+}
+
+[data-theme="dark"] .ai-chat-window-card {
+  background: rgba(18, 33, 51, 0.96);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+}
+
+.ai-chat-header {
+  padding: 16px 20px;
+  background: var(--gradient-brand);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ai-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sparkle-icon-tile {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: grid;
+  place-items: center;
+}
+
+.ai-title-group h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.ai-online-status {
+  font-size: 11px;
+  opacity: 0.85;
+  display: block;
+  margin-top: 1px;
+}
+
+.ai-close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.ai-close-btn:hover {
+  opacity: 1;
+}
+
+/* محتوى المحادثة */
+.ai-chat-body {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-bubble-container {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chat-bubble-container.ai {
+  align-self: flex-start;
+}
+
+.chat-bubble-container.user {
+  align-self: flex-end;
+}
+
+.bubble-msg {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.ai .bubble-msg {
+  background: var(--surface-2);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.user .bubble-msg {
+  background: var(--gradient-brand);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+/* فقاعة فشل — كان الفشل يُطبع في الـ console فقط فيبدو أن المساعد تجاهل الرسالة */
+.ai .bubble-msg.bubble-error {
+  background: var(--danger-bg);
+  border-color: var(--danger);
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.bubble-time {
+  font-size: 10px;
+  color: var(--text-3);
+  align-self: flex-end;
+}
+
+.ai .bubble-time {
+  align-self: flex-start;
+}
+
+/* مؤشر الكتابة */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+}
+
+/* :not(.sr-only) وإلا صار نص قارئ الشاشة نقطة رابعة مرئية */
+.typing-indicator span:not(.sr-only) {
+  width: 6px;
+  height: 6px;
+  background: var(--text-2);
+  border-radius: 50%;
+  animation: typing-bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* الاقتراحات السريعة */
+.ai-chat-quick-replies {
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid var(--border);
+}
+
+[data-theme="dark"] .ai-chat-quick-replies {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.quick-reply-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 12px;
+  font-size: 11.5px;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.quick-reply-btn:hover:not(:disabled) {
+  background: var(--gradient-brand-soft);
+  color: var(--text);
+  border-color: var(--green-300);
+  transform: translateY(-1px);
+}
+
+.quick-reply-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ذيل إرسال الرسالة */
+.ai-chat-input-footer {
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* textarea بدل input حتى يعمل Shift+Enter لسطر جديد، بنفس مظهر الحقل السابق */
+.ai-chat-input-footer textarea {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  resize: none;
+  min-height: 42px;
+  max-height: 120px;
+  overflow-y: auto;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ai-chat-input-footer textarea:focus,
+.ai-chat-input-footer textarea:focus-visible {
+  outline: none;
+  border-color: var(--green-500);
+  box-shadow: 0 0 0 3px var(--green-100);
+}
+
+.ai-chat-input-footer textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chat-send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--gradient-brand);
+  color: #fff;
+  border: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chat-send-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.chat-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* شاشات الجوال */
+@media (max-width: 768px) {
+  /* شريط التنقل السفلي ارتفاعه 64px + شريط أمان iOS — نتركه يعلوه بفاصل واضح */
+  .ai-assistant-wrapper {
+    bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+    right: 16px;
+  }
+
+  .ai-assistant-wrapper.rtl-assistant,
+  [dir="rtl"] .ai-assistant-wrapper {
+    right: auto;
+    left: 16px;
+  }
+
+  .ai-floating-trigger-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .ai-chat-window-card {
+    width: calc(100vw - 32px);
+    height: min(440px, calc(100vh - 200px));
+    bottom: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-badge-pulse::after {
+    animation: none;
+  }
+
+  .ai-floating-trigger-btn,
+  .quick-reply-btn,
+  .chat-send-btn,
+  .ai-chat-input-footer textarea {
+    transition-duration: 0.01ms !important;
+  }
+
+  .ai-floating-trigger-btn:hover,
+  .quick-reply-btn:hover:not(:disabled),
+  .chat-send-btn:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .typing-indicator span:not(.sr-only) {
+    animation-duration: 2.4s;
+  }
+}

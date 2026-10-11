@@ -1,0 +1,299 @@
+.contact-page-container {
+  padding-bottom: var(--space-7);
+}
+
+.contact-header {
+  padding-top: var(--space-6);
+}
+
+.contact-content-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.contact-info-panel-box {
+  height: 100%;
+}
+
+.info-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.info-card .sub {
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+.info-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-detail-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.detail-icon {
+  color: var(--green);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.info-detail-item strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.info-detail-item p {
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+.google-forms-movement-card {
+  margin-top: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: var(--radius);
+}
+
+.google-forms-movement-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.google-forms-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* .btn-outline و .btn-sm مش متعرّفين في global.css، فالزر كان بيطلع
+   بغير حدود ولا لون — بنعطيه ستايل محلي لحد ما يتعرّفوا عالمياً. */
+.google-forms-link {
+  margin-top: 12px;
+  padding: 9px 18px;
+  font-size: 0.85rem;
+  border: 1.5px solid var(--green);
+  color: var(--green-700);
+  background: transparent;
+}
+
+[data-theme="dark"] .google-forms-link {
+  color: var(--green-300);
+}
+
+.google-forms-link:hover {
+  background: var(--gradient-brand-soft);
+}
+
+.google-forms-movement-card p {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.contact-form-wrapper {
+  padding: 32px;
+}
+
+.contact-form-wrapper h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.contact-form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.submit-btn-form {
+  height: 48px;
+  font-size: 1rem;
+}
+
+.form-success-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 32px 0;
+  color: var(--green-700);
+}
+
+[data-theme="dark"] .form-success-message {
+  color: var(--green-300);
+}
+
+.form-success-message p {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ── حالات الخطأ في الفورم ─────────────────────────────────── */
+
+/* بانر الفشل أعلى الفورم — role="alert" في الـ TSX */
+.form-error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--danger-bg);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.form-error-banner svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* رسالة الحقل — مربوطة بالحقل بـ aria-describedby */
+.field-error-text {
+  color: var(--danger);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: start;
+}
+
+.contact-page-container .form-control[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.contact-page-container .form-control[aria-invalid="true"]:focus {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 4px var(--danger-bg);
+}
+
+.contact-page-container .btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.booking-timezone-hint {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin-top: -4px;
+}
+
+/* Booking Section */
+.meeting-booking-section {
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  margin-top: 48px;
+}
+
+.booking-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.booking-info-text h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  margin-top: 12px;
+}
+
+.booking-info-text p {
+  color: var(--text-2);
+  margin-top: 16px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.booking-form-card {
+  padding: 32px;
+}
+
+.booking-form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking-submit-btn {
+  height: 48px;
+  margin-top: 8px;
+}
+
+.booking-success-message {
+  padding: 20px 0;
+}
+
+.booking-success-message .success-icon {
+  color: var(--green);
+  margin-bottom: 16px;
+}
+
+.booking-success-message h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.booking-success-message p {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .contact-content-grid-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .booking-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .booking-info-text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .form-row-two-columns {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
